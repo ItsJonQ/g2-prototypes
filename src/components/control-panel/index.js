@@ -1,57 +1,65 @@
-import React, { useState } from "react";
-import View from "../view";
-import { ControlBox, Title, Input } from "./styles";
+import React, { useReducer } from "react";
+import { ControlPanelContext, useControlPanelContext } from "./context";
+import Controls from "./controls";
+import { getAttributesAsValues, reducer } from "./reducer";
 
-function Field({ label, value, onChange }) {
-  return (
-    <View mb={2}>
-      <View mb={1}>{label}</View>
-      <Input value={value} onChange={e => onChange(e.target.value)} />
-    </View>
-  );
-}
-
-function FloatingPanel({ attributes, setAttributes }) {
-  const items = Object.keys(attributes);
-
-  return (
-    <ControlBox>
-      <View mb={2}>
-        <Title>CONTROL PANEL</Title>
-      </View>
-      {items.map(item => {
-        const value = attributes[item];
-        const onChange = nextValue => {
-          setAttributes({ [item]: nextValue });
-        };
-        return <Field onChange={onChange} label={item} value={value} />;
-      })}
-    </ControlBox>
-  );
-}
+export * from "./context";
+export { getAttributesAsValues } from "./reducer";
 
 export default function ControlPanel(props) {
-  const { attributes, children } = props;
-  const [state, setState] = useState(attributes);
+	const { attributes, children } = props;
+	const [state, dispatch] = useReducer(reducer, attributes);
 
-  const setAttributes = nextState => {
-    setState({ ...state, ...nextState });
-  };
+	const updateValue = (prop, value, { type: knobType }) => {
+		let nextValue = value;
+		if (knobType === "number") {
+			nextValue = toNumber(nextValue);
+		}
 
-  return (
-    <>
-      <FloatingPanel attributes={state} setAttributes={setAttributes} />
-      {children({ attributes: state, setAttributes })}
-    </>
-  );
+		dispatch({ type: "update_value", payload: { prop, value: nextValue } });
+	};
+
+	const addValue = (prop, value) => {
+		dispatch({ type: "add_value", payload: { prop, value: value } });
+	};
+
+	const contextProps = {
+		state,
+		dispatch,
+		addValue,
+		updateValue
+	};
+
+	return (
+		<>
+			<ControlPanelContext.Provider value={contextProps}>
+				<Controls />
+				{children}
+			</ControlPanelContext.Provider>
+		</>
+	);
 }
 
 export function withControlPanel(attributes = {}) {
-  return WrappedComponent => {
-    return () => (
-      <ControlPanel attributes={attributes}>
-        {controlPanelProps => <WrappedComponent {...controlPanelProps} />}
-      </ControlPanel>
-    );
-  };
+	return WrappedComponent => {
+		return props => (
+			<ControlPanel attributes={attributes}>
+				<ContextConnector>
+					<WrappedComponent {...props} />
+				</ContextConnector>
+			</ControlPanel>
+		);
+	};
+}
+
+function ContextConnector({ children }) {
+	const { state } = useControlPanelContext();
+	const attributesAsValues = getAttributesAsValues(state);
+
+	return React.cloneElement(children, { attributes: attributesAsValues });
+}
+
+function toNumber(value) {
+	const numberValue = parseInt(value, 10);
+	return isNaN(numberValue) ? value : numberValue;
 }
