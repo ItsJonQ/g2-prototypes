@@ -4,6 +4,7 @@ import { Dashicon } from "@wordpress/components";
 
 import { Slider, ToolbarWrapper, ToolbarBase, Group, Item } from "./styles";
 import { withControlPanel, useKnobs } from "../control-panel";
+import { Icon } from "../icon";
 import { Draggable } from "./draggable";
 import { DragHandle } from "./drag-handle";
 
@@ -72,33 +73,33 @@ export function Toolbar(props) {
 					<ToolbarBase isActive={isActive} isExpanded={isExpanded}>
 						<Group>
 							<Item isPrimaryAction>
-								<Dashicon icon="editor-paragraph" />
+								<Icon icon="block-paragraph" />
 							</Item>
 						</Group>
 						<Group>
 							<Item>
-								<Dashicon icon="editor-alignleft" />
+								<Icon icon="align-left" />
 							</Item>
 						</Group>
 						<Slider isActive={isActive} isExpanded={isExpanded}>
 							<Group>
 								<Item>
-									<Dashicon icon="editor-bold" />
+									<Icon icon="bold" />
 								</Item>
 								<Item>
-									<Dashicon icon="editor-italic" />
+									<Icon icon="italic" />
 								</Item>
 								<Item>
-									<Dashicon icon="admin-links" />
+									<Icon icon="link" />
 								</Item>
 								<Item>
-									<Dashicon icon="arrow-down-alt2" />
+									<Icon icon="chevron-down" />
 								</Item>
 							</Group>
 						</Slider>
 						<Group isLast>
 							<Item>
-								<Dashicon icon="ellipsis" />
+								<Icon icon="ellipsis" />
 							</Item>
 						</Group>
 					</ToolbarBase>

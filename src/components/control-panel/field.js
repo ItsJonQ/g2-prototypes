@@ -32,14 +32,18 @@ function TextInput(props) {
 	return <Input {...props} />;
 }
 
+function BooleanInput(props) {
+	return <Input {...props} type="checkbox" />;
+}
+
 function NumberInput(props) {
 	const value = toNumber(props.value);
-	return <TextInput {...props} value={value} />;
+	return <Input {...props} value={value} />;
 }
 
 function RangeInput(props) {
 	const value = toNumber(props.value);
-	return <TextInput {...props} value={value} type="range" />;
+	return <Input {...props} value={value} type="range" />;
 }
 
 function SelectInput(props) {
@@ -65,6 +69,7 @@ function SelectInput(props) {
 }
 
 const InputComponents = {
+	boolean: BooleanInput,
 	text: TextInput,
 	number: NumberInput,
 	range: RangeInput,

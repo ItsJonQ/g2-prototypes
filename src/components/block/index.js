@@ -9,7 +9,7 @@ function useCreateAttributes() {
 
 	return {
 		blockBorderAnimationSpeed: useNumber("blockBorderAnimationSpeed", 0),
-		alwaysHideBlockBorder: useBoolean("alwaysHideBlockBorder", true),
+		// alwaysHideBlockBorder: useBoolean("alwaysHideBlockBorder", true),
 		toolbarFadeAnimationSpeed: useNumber("toolbarFadeAnimationSpeed", 300),
 		toolbarTopOffset: useNumber("toolbarTopOffset", -40)
 	};
