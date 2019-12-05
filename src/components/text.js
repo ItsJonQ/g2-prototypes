@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { is } from "@itsjonq/is";
 
 const shades = ({ shade }) => {
 	const shades = {
@@ -12,10 +13,16 @@ const shades = ({ shade }) => {
 	return `opacity: ${value};`;
 };
 
+const size = ({ size = "1rem" }) => {
+	const fontSize = is.number(size) ? `${size}px` : size;
+	return `font-size: ${fontSize}`;
+};
+
 export const Text = styled.div`
 	margin: 0;
 	padding: 0;
-	${shades}
+	${size};
+	${shades};
 `;
 
 Text.defaultProps = {
