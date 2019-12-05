@@ -1,3 +1,4 @@
+import { View } from "@itsjonq/elm";
 import styled from "@emotion/styled";
 import { is } from "@itsjonq/is";
 
@@ -18,7 +19,7 @@ const size = ({ size = "1rem" }) => {
 	return `font-size: ${fontSize}`;
 };
 
-export const Text = styled.div`
+export const Text = styled(View)`
 	margin: 0;
 	padding: 0;
 	${size};

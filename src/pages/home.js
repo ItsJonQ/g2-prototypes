@@ -15,8 +15,14 @@ export function HomePage() {
 			<Link to="/toolbar-base">Toolbar (Base)</Link>
 			<Link to="/block-base">Block x Toolbar (Base)</Link>
 
-			<hr />
+			<View mt={4} mb={4}>
+				<hr />
+			</View>
 
+			<View mb={4}>
+				<Text shade="muted">Select a component:</Text>
+			</View>
+			<Link to="/buttons">Buttons</Link>
 			<Link to="/icons">Icons</Link>
 		</Page>
 	);
