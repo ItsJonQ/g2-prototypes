@@ -1,10 +1,12 @@
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
+import { is } from "@itsjonq/is";
 
 const size = ({ size = 24 }) => {
+	const iconSize = is.number(size) ? size : 24;
 	return css({
-		width: size,
-		height: size
+		width: iconSize,
+		height: iconSize
 	});
 };
 
@@ -14,12 +16,14 @@ export const IconWrapper = styled.div`
 
 	svg {
 		display: block;
+		width: 100%;
+		height: 100%;
 
 		* {
 			&[stroke] {
 				stroke: currentColor;
 			}
-			&[fill]:not[fill="white"] {
+			&[fill]:not([fill="white"]) {
 				fill: currentColor;
 			}
 		}

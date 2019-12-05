@@ -3,10 +3,9 @@ import { ThemeProvider } from "emotion-theming";
 import { Dashicon } from "@wordpress/components";
 
 import { Slider, ToolbarWrapper, ToolbarBase, Group, Item } from "./styles";
-import { withControlPanel } from "../control-panel";
+import { withControlPanel, useKnobs } from "../control-panel";
 import { Draggable } from "./draggable";
 import { DragHandle } from "./drag-handle";
-import { useKnobs } from "../control-panel/context";
 
 // CONFIGS
 // Play with these!
