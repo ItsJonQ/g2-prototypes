@@ -178,6 +178,7 @@ const iconButton = props => {
 		&:hover,
 		&.is-hovered {
 			background-color: var(--buttonFocusColor);
+			box-shadow: 0 0 0 1px var(--buttonFocusColor);
 			color: white;
 		}
 
