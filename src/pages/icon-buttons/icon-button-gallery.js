@@ -9,7 +9,7 @@ import { View } from "../../components/view";
 import { Text } from "../../components/text";
 
 function useCreateAttributes() {
-	const { useRange, useText } = useKnobs();
+	const { useText } = useKnobs();
 	return {
 		buttonMainColor: useText("buttonMainColor", "#3e58e1")
 	};

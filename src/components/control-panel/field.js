@@ -53,13 +53,8 @@ function SelectInput(props) {
 	return (
 		<Select value={value} {...restProps}>
 			{items.map(item => {
-				const isSelected = value === item.value;
 				return (
-					<option
-						key={item.value}
-						value={item.value}
-						selected={isSelected}
-					>
+					<option key={item.value} value={item.value}>
 						{item.label}
 					</option>
 				);

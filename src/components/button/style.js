@@ -9,7 +9,6 @@ export const disabledColor = "#ccc";
 export const baseButtonStyles = {
 	"--buttonTextColor": mainColor,
 	"--buttonBackgroundColor": "transparent",
-	"--buttonFocusColor": "transparent",
 	"--buttonPressedColor": pressedColor,
 	"--buttonDisabledColor": disabledColor,
 	"--buttonFocusColor": getButtonFocusColor(mainColor),

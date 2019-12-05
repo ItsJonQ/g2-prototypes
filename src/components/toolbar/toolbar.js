@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "emotion-theming";
-import { Dashicon } from "@wordpress/components";
 
 import { Slider, ToolbarWrapper, ToolbarBase, Group, Item } from "./styles";
 import { withControlPanel, useKnobs } from "../control-panel";

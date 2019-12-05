@@ -5,7 +5,7 @@ import { ControlledToolbar as Toolbar } from "../toolbar";
 import { BlockWrapper, ToolbarWrapper, ContentWrapper } from "./styles";
 
 function useCreateAttributes() {
-	const { useNumber, useBoolean } = useKnobs();
+	const { useNumber } = useKnobs();
 
 	return {
 		blockBorderAnimationSpeed: useNumber("blockBorderAnimationSpeed", 0),
