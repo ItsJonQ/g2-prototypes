@@ -22,6 +22,7 @@ export function HomePage() {
 			</View>
 			<Link to="/buttons">Buttons</Link>
 			<Link to="/icons">Icons</Link>
+			<Link to="/icon-buttons">IconButtons</Link>
 		</Page>
 	);
 }

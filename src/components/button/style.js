@@ -7,26 +7,30 @@ export const pressedColor = "#000";
 export const disabledColor = "#ccc";
 
 export const baseButtonStyles = {
-	["--buttonTextColor"]: mainColor,
-	["--buttonBackgroundColor"]: "transparent",
-	["--buttonFocusColor"]: "transparent",
-	["--buttonPressedColor"]: pressedColor,
-	["--buttonDisabledColor"]: disabledColor,
-	["--buttonFontFamily"]:
+	"--buttonTextColor": mainColor,
+	"--buttonBackgroundColor": "transparent",
+	"--buttonFocusColor": "transparent",
+	"--buttonPressedColor": pressedColor,
+	"--buttonDisabledColor": disabledColor,
+	"--buttonFocusColor": getButtonFocusColor(mainColor),
+	"--buttonFontFamily":
 		'Cabin, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
+	alignItems: "center",
 	appearance: "none",
+	backgroundColor: "var(--buttonBackgroundColor)",
 	border: "1px solid",
 	borderColor: "currentColor",
-	backgroundColor: "var(--buttonBackgroundColor)",
+	borderRadius: 4,
 	color: "var(--buttonTextColor)",
 	cursor: "pointer",
+	display: "inline-flex",
+	justifyContent: "center",
 	fontFamily: "var(--buttonFontFamily)",
-	fontWeight: 500,
 	fontSize: 14,
-	lineHeight: 1,
-	borderRadius: 4,
-	padding: "8px 24px",
+	fontWeight: 500,
 	height: 36,
+	lineHeight: 1,
+	padding: "8px 24px",
 	outline: "none",
 	"&[disabled]": {
 		pointerEvents: "none"
@@ -40,9 +44,7 @@ const baseButton = () => {
 const variantDefault = ({ theme: { color } }) => {
 	return css`
 		--buttonTextColor: ${color};
-		--buttonFocusColor: ${colorUtils(color)
-			.darken(10)
-			.toHexString()};
+		--buttonFocusColor: ${getButtonFocusColor(color)};
 
 		&:hover,
 		&.is-hovered {
@@ -71,9 +73,7 @@ const variantPrimary = ({ theme: { color } }) => {
 	return css`
 		--buttonBackgroundColor: ${color};
 		--buttonTextColor: white;
-		--buttonFocusColor: ${colorUtils(color)
-			.darken(10)
-			.toHexString()};
+		--buttonFocusColor: ${getButtonFocusColor(color)};
 
 		&:hover,
 		&.is-hovered {
@@ -102,9 +102,7 @@ const variantPrimary = ({ theme: { color } }) => {
 const variantTertiary = ({ theme: { color } }) => {
 	return css`
 		--buttonTextColor: ${color};
-		--buttonFocusColor: ${colorUtils(color)
-			.darken(10)
-			.toHexString()};
+		--buttonFocusColor: ${getButtonFocusColor(color)};
 
 		border-color: transparent;
 
@@ -161,10 +159,56 @@ const size = props => {
 	}
 };
 
+const iconButton = props => {
+	const {
+		isIconButton,
+		theme: { color }
+	} = props;
+
+	if (!isIconButton) return "";
+
+	return css`
+		--buttonFocusColor: ${getButtonFocusColor(color)};
+		border: none;
+		color: black;
+		width: 32px;
+		height: 32px;
+		padding: 2px;
+
+		&:hover,
+		&.is-hovered {
+			background-color: var(--buttonFocusColor);
+			color: white;
+		}
+
+		&:focus,
+		&.is-focused {
+			background-color: var(--buttonTextColor);
+			box-shadow: 0 0 0 1px var(--buttonFocusColor);
+			color: white;
+		}
+
+		&:active,
+		&.is-active,
+		&.is-pressed {
+			background-color: var(--buttonPressedColor);
+			box-shadow: 0 0 0 1px var(--buttonPressedColor);
+			color: white;
+		}
+	`;
+};
+
+function getButtonFocusColor(color) {
+	return colorUtils(color)
+		.darken(10)
+		.toHexString();
+}
+
 export const BaseButton = styled("button")`
 	${baseButton};
 	${variant};
 	${size};
+	${iconButton};
 `;
 
 export const ButtonContent = styled.span``;

@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "@emotion/styled";
 import { Flex } from "@itsjonq/elm";
 import { withControlPanel, useKnobs } from "../../components/control-panel";
 import { Button } from "../../components/button";
@@ -40,7 +39,7 @@ function ButtonSample(props) {
 
 	const fontFamily = buttonFonts[buttonFontFamily] || buttonFonts.cabin;
 
-	const buttonProps = {
+	const componentProps = {
 		color: buttonMainColor,
 		variant,
 		size: buttonSize || "md",
@@ -59,29 +58,29 @@ function ButtonSample(props) {
 			<Flex>
 				<Flex.Block>
 					<Label>Rested</Label>
-					<Button {...buttonProps}>{buttonContent}</Button>
+					<Button {...componentProps}>{buttonContent}</Button>
 				</Flex.Block>
 				<Flex.Block>
 					<Label>Hover</Label>
-					<Button {...buttonProps} isHovered>
+					<Button {...componentProps} isHovered>
 						{buttonContent}
 					</Button>
 				</Flex.Block>
 				<Flex.Block>
 					<Label>Focus</Label>
-					<Button {...buttonProps} isFocused>
+					<Button {...componentProps} isFocused>
 						{buttonContent}
 					</Button>
 				</Flex.Block>
 				<Flex.Block>
 					<Label>Pressed</Label>
-					<Button {...buttonProps} isPressed>
+					<Button {...componentProps} isPressed>
 						{buttonContent}
 					</Button>
 				</Flex.Block>
 				<Flex.Block>
 					<Label>Disabled</Label>
-					<Button {...buttonProps} disabled>
+					<Button {...componentProps} disabled>
 						{buttonContent}
 					</Button>
 				</Flex.Block>

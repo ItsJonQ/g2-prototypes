@@ -10,9 +10,15 @@ const size = ({ size = 24 }) => {
 	});
 };
 
+const display = ({ display = "inline-block" }) => {
+	return css({
+		display
+	});
+};
+
 export const IconWrapper = styled.div`
+	${display};
 	${size};
-	display: inline-block;
 
 	svg {
 		display: block;
