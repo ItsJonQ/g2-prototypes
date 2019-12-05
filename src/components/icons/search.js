@@ -11,13 +11,13 @@ export function SearchIcon(props) {
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 			>
-				<path d="M5 18L9 14.5" stroke="#1E1E1E" stroke-width="1.5" />
+				<path d="M5 18L9 14.5" stroke="#1E1E1E" strokeWidth="1.5" />
 				<circle
 					cx="12.5"
 					cy="11.5"
 					r="4.75"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

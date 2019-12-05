@@ -14,7 +14,7 @@ export function MoverDraggedIcon(props) {
 				<path
 					d="M18 9L6 9M18 16H6"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

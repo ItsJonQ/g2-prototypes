@@ -20,7 +20,7 @@ export function AlignImageCenterIcon(props) {
 					fill="#1E1E1E"
 					stroke="#1E1E1E"
 				/>
-				<path d="M16 5H8M16 19H8" stroke="#1E1E1E" stroke-width="1.5" />
+				<path d="M16 5H8M16 19H8" stroke="#1E1E1E" strokeWidth="1.5" />
 			</svg>
 		</IconWrapper>
 	);

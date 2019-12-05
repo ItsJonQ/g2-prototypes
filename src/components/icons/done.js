@@ -14,7 +14,7 @@ export function DoneIcon(props) {
 				<path
 					d="M4 12.5L9 17.5L19 7"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

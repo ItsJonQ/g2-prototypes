@@ -14,7 +14,7 @@ export function EllipsisIcon(props) {
 				<path
 					d="M13 12L11 12M19 12L17 12M7 12L5 12"
 					stroke="#1E1E1E"
-					stroke-width="2"
+					strokeWidth="2"
 				/>
 			</svg>
 		</IconWrapper>

@@ -14,7 +14,7 @@ export function ArrowRightIcon(props) {
 				<path
 					d="M19 12.25L13.75 18M19 12.25H4M19 12.25L13.75 7"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

@@ -14,7 +14,7 @@ export function AddIcon(props) {
 				<path
 					d="M11.75 7V18M6 12.25H17"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

@@ -14,7 +14,7 @@ export function ChevronLeftIcon(props) {
 				<path
 					d="M14.25 7L9 12.75L14.25 18"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

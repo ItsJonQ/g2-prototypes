@@ -19,7 +19,7 @@ export function AlignImageLeftIcon(props) {
 					fill="#1E1E1E"
 					stroke="#1E1E1E"
 				/>
-				<path d="M5 5H13M5 19H13" stroke="#1E1E1E" stroke-width="1.5" />
+				<path d="M5 5H13M5 19H13" stroke="#1E1E1E" strokeWidth="1.5" />
 			</svg>
 		</IconWrapper>
 	);

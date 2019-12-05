@@ -14,7 +14,7 @@ export function DirectoryIcon(props) {
 				<path
 					d="M2 6H14M6 12H18M10 18H22"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

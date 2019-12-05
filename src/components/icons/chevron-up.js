@@ -14,7 +14,7 @@ export function ChevronUpIcon(props) {
 				<path
 					d="M18 14.25L12.25 9L7 14.25"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

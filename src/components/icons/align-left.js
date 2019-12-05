@@ -14,7 +14,7 @@ export function AlignLeftIcon(props) {
 				<path
 					d="M3 5H13M3 12H21M3 19H13"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

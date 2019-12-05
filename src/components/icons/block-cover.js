@@ -18,7 +18,7 @@ export function BlockCoverIcon(props) {
 					height="12.5"
 					rx="1.25"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 				<path
 					d="M15 13L13 10.5L11 13V6H15V13Z"

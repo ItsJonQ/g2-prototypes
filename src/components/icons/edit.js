@@ -18,7 +18,7 @@ export function EditIcon(props) {
 				<path
 					d="M4 21H12M19 6.09677L9.03333 16.1613L6 17L6.86667 14.0645L16.8333 4L19 6.09677Z"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

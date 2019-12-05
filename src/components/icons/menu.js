@@ -14,7 +14,7 @@ export function MenuIcon(props) {
 				<path
 					d="M5 5H19M5 12H19M5 19H19"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

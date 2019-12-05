@@ -14,7 +14,7 @@ export function AlighRightIcon(props) {
 				<path
 					d="M21 5H11M21 12H3M21 19H11"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

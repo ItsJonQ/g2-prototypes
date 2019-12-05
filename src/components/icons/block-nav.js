@@ -16,7 +16,7 @@ export function BlockNavIcon(props) {
 					cy="12"
 					r="7.25"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 				<path
 					d="M10.5019 11.3502L14.9523 8.36505L13.5037 13.0933L9.04789 16.0466L10.5019 11.3502Z"

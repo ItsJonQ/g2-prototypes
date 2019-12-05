@@ -14,7 +14,7 @@ export function UndoIcon(props) {
 				<path
 					d="M8.99999 7L4.99999 11.5M4.99999 11.5L8.99999 15.5M4.99999 11.5C8.33333 11.5 11.8022 11.5 15.0022 11.5C18.2029 11.5 18.002 16 18.0022 17.5"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

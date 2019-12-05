@@ -14,7 +14,7 @@ export function AlignCenterIcon(props) {
 				<path
 					d="M17 5H7M21 12H3M17 19H7"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

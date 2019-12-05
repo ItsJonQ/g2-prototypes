@@ -23,7 +23,7 @@ export function AlignImageRightIcon(props) {
 				<path
 					d="M19 5H11M19 19H11"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>

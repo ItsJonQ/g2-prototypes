@@ -14,7 +14,7 @@ export function CloseIcon(props) {
 				<path
 					d="M5.40456 5L19 19M5 19L18.5954 5"
 					stroke="#1E1E1E"
-					stroke-width="1.5"
+					strokeWidth="1.5"
 				/>
 			</svg>
 		</IconWrapper>
