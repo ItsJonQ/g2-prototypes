@@ -1,10 +1,15 @@
 import React from "react";
 import { HashRouter as Router } from "react-router-dom";
+import { ControlPanelProvider } from "./control-panel/provider";
 
-export default function AppProvider({ children }) {
-  return (
-    <Router>
-      <>{children}</>
-    </Router>
-  );
+export function AppProvider({ children }) {
+	return (
+		<ControlPanelProvider>
+			<Router>
+				<>{children}</>
+			</Router>
+		</ControlPanelProvider>
+	);
 }
+
+export default { AppProvider };

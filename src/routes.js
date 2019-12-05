@@ -1,15 +1,17 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Home from "./pages/home";
-import BlockBase from "./pages/block-base";
-import ToolbarBase from "./pages/toolbar-base";
+import { HomePage } from "./pages/home";
+import { BlockBasePage } from "./pages/block-base";
+import { ToolbarPage } from "./pages/toolbar-base";
 
-export default function Routes() {
-  return (
-    <Switch>
-      <Route path="/block-base" component={BlockBase} />
-      <Route path="/toolbar-base" component={ToolbarBase} />
-      <Route path="/" component={Home} />
-    </Switch>
-  );
+export function Routes() {
+	return (
+		<Switch>
+			<Route path="/block-base" component={BlockBasePage} />
+			<Route path="/toolbar-base" component={ToolbarPage} />
+			<Route path="/" component={HomePage} />
+		</Switch>
+	);
 }
+
+export default Routes;

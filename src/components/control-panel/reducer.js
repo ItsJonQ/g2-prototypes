@@ -1,23 +1,36 @@
-const initialState = {};
+const initialState = [];
 
 export function reducer(state = initialState, action) {
 	const { type, payload } = action;
+	const { attribute } = payload || {};
 
 	switch (type) {
-		case "update_value":
-			return {
-				...state,
-				[payload.prop]: {
-					...state[payload.prop],
-					value: payload.value
+		case "update_attribute":
+			return state.map(attr => {
+				if (attr.prop === attribute.prop) {
+					return attribute;
 				}
-			};
+				return attr;
+			});
 
-		case "add_value":
-			return {
-				...state,
-				[payload.prop]: payload.value
-			};
+		case "add_attribute":
+			const existingAttr = state.find(
+				attr => attr.prop === attribute.prop
+			);
+
+			if (existingAttr) {
+				return state.map(attr => {
+					if (attr.prop === attribute.prop) {
+						return attribute;
+					}
+					return attr;
+				});
+			}
+
+			return [...state, attribute];
+
+		case "reset":
+			return [];
 
 		default:
 			return state;

@@ -1,27 +1,11 @@
 import React from "react";
 import { useControlPanelContext } from "./context";
-import View from "../view";
-import { ControlBox, Title, Input } from "./styles";
+import { Field } from "./field";
+import { View } from "../view";
+import { ControlBox, Title } from "./styles";
 
-function useItems() {
-	const { state } = useControlPanelContext();
-	const keys = Object.keys(state);
-
-	return keys.reduce((collection, key) => {
-		return [
-			...collection,
-			{
-				...state[key],
-				prop: key,
-				label: key,
-				key
-			}
-		];
-	}, []);
-}
-
-function Controls() {
-	const { updateValue } = useControlPanelContext();
+export function Controls() {
+	const { updateAttribute } = useControlPanelContext();
 	const items = useItems();
 
 	return (
@@ -31,7 +15,7 @@ function Controls() {
 			</View>
 			{items.map(item => {
 				const onChange = nextValue => {
-					updateValue(item.prop, nextValue, item);
+					updateAttribute({ ...item, value: nextValue });
 				};
 				return <Field {...item} onChange={onChange} />;
 			})}
@@ -39,13 +23,18 @@ function Controls() {
 	);
 }
 
-function Field({ label, value, onChange }) {
-	return (
-		<View mb={2}>
-			<View mb={1}>{label}</View>
-			<Input value={value} onChange={e => onChange(e.target.value)} />
-		</View>
-	);
+function useItems() {
+	const { state } = useControlPanelContext();
+
+	if (!Array.isArray(state)) {
+		return [];
+	}
+
+	return state.map(item => ({
+		...item,
+		label: item.prop,
+		key: item.prop
+	}));
 }
 
 export default Controls;
