@@ -12,12 +12,15 @@ export const baseButtonStyles = {
 	["--buttonFocusColor"]: "transparent",
 	["--buttonPressedColor"]: pressedColor,
 	["--buttonDisabledColor"]: disabledColor,
+	["--buttonFontFamily"]:
+		'Cabin, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
 	appearance: "none",
 	border: "1px solid",
 	borderColor: "currentColor",
 	backgroundColor: "var(--buttonBackgroundColor)",
 	color: "var(--buttonTextColor)",
 	cursor: "pointer",
+	fontFamily: "var(--buttonFontFamily)",
 	fontWeight: 500,
 	fontSize: 14,
 	lineHeight: 1,
@@ -150,7 +153,7 @@ const size = props => {
 		case "sm":
 			return css`
 				font-size: 11px;
-				padding: 3.5px 24px 4px;
+				padding: 4px 24px 4px;
 				height: 24px;
 			`;
 		default:

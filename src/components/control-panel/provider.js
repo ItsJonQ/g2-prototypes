@@ -8,6 +8,7 @@ const KNOB_TYPE = {
 	boolean: "boolean",
 	text: "text",
 	number: "number",
+	range: "range",
 	select: "select"
 };
 
@@ -41,28 +42,50 @@ export function ControlPanelProvider({ children }) {
 		});
 	};
 
-	const useNumber = (prop, value) => {
+	const useRange = (prop, value, extraProps = {}) => {
+		useAddAttribute({
+			type: KNOB_TYPE.range,
+			prop,
+			value,
+			...extraProps
+		});
+	};
+
+	const useSelect = (prop, options, value, extraProps = {}) => {
+		useAddAttribute({
+			type: KNOB_TYPE.select,
+			prop,
+			options,
+			value,
+			...extraProps
+		});
+	};
+
+	const useNumber = (prop, value, extraProps = {}) => {
 		const numberValue = toNumber(value);
 		useAddAttribute({
 			type: KNOB_TYPE.number,
 			prop,
-			value: numberValue
+			value: numberValue,
+			...extraProps
 		});
 	};
 
-	const useText = (prop, value) => {
+	const useText = (prop, value, extraProps = {}) => {
 		useAddAttribute({
 			type: KNOB_TYPE.text,
 			prop,
-			value: value
+			value,
+			...extraProps
 		});
 	};
 
-	const useBoolean = (prop, value) => {
+	const useBoolean = (prop, value, extraProps = {}) => {
 		useAddAttribute({
 			type: KNOB_TYPE.boolean,
 			prop,
-			value: value
+			value,
+			...extraProps
 		});
 	};
 
@@ -75,7 +98,9 @@ export function ControlPanelProvider({ children }) {
 		useAddAttribute,
 		useBoolean,
 		useNumber,
+		useRange,
 		useResetAttributes,
+		useSelect,
 		useText
 	};
 

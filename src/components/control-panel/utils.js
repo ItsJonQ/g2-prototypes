@@ -1,5 +1,5 @@
 export function toNumber(value) {
-	const numberValue = parseInt(value, 10);
+	const numberValue = parseFloat(value, 10);
 	return isNaN(numberValue) ? value : numberValue;
 }
 

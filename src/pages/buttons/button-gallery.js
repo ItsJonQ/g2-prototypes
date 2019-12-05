@@ -6,10 +6,24 @@ import { Button } from "../../components/button";
 import { View } from "../../components/view";
 import { Text } from "../../components/text";
 
+const buttonFonts = {
+	cabin: "Cabin",
+	system:
+		' -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif'
+};
+
 function useCreateAttributes() {
-	const { useText } = useKnobs();
+	const { useSelect, useText } = useKnobs();
 	return {
 		buttonContent: useText("buttonContent", "Button"),
+		buttonFontFamily: useSelect(
+			"buttonFontFamily",
+			{
+				Cabin: "cabin",
+				System: "system"
+			},
+			"cabin"
+		),
 		buttonMainColor: useText("buttonMainColor", "#3e58e1")
 	};
 }
@@ -17,15 +31,22 @@ function useCreateAttributes() {
 function ButtonSample(props) {
 	const {
 		buttonContent,
+		buttonFontFamily,
 		buttonMainColor,
 		buttonSize,
 		variant,
 		title
 	} = props;
+
+	const fontFamily = buttonFonts[buttonFontFamily] || buttonFonts.cabin;
+
 	const buttonProps = {
 		color: buttonMainColor,
 		variant,
-		size: buttonSize || "md"
+		size: buttonSize || "md",
+		style: {
+			"--buttonFontFamily": fontFamily
+		}
 	};
 
 	return (

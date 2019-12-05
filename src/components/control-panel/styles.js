@@ -26,3 +26,10 @@ export const Input = styled.input`
 	font-family: inherit;
 	border: 1px solid black;
 `;
+
+export const Select = styled.select`
+	width: 100%;
+	font-family: inherit;
+	border: 1px solid black;
+	border-radius: 0;
+`;

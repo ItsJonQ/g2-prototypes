@@ -6,17 +6,22 @@ import * as Icons from "../../components/icons";
 import { Text } from "../../components/text";
 
 function useCreateAttributes() {
-	const { useNumber, useText } = useKnobs();
+	const { useRange, useText } = useKnobs();
 	return {
-		iconSize: useNumber("iconSize", 24),
-		iconColor: useText("iconColor", "black")
+		iconColor: useText("iconColor", "black"),
+		iconScale: useRange("iconScale", 1, {
+			step: 0.25,
+			min: 0.5,
+			max: 3
+		})
 	};
 }
 
 export function IconGallery(props) {
 	const { attributes } = props;
-	const { iconColor, iconSize } = attributes;
+	const { iconColor, iconScale } = attributes;
 	const items = Object.keys(Icons);
+	const iconSize = 24 * iconScale;
 
 	return (
 		<Grid>
