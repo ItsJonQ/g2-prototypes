@@ -5,7 +5,7 @@ import { withControlPanel, useKnobs } from "../../components/control-panel";
 import * as Icons from "../../components/icons";
 import { Text } from "../../components/text";
 
-function useCreateAttributes() {
+function useAttributes() {
 	const { useRange, useText } = useKnobs();
 	return {
 		iconColor: useText("iconColor", "black"),
@@ -69,7 +69,7 @@ const IconWrapper = styled.div`
 	justify-content: center;
 `;
 
-export const ControlledIconGallery = withControlPanel(useCreateAttributes)(
+export const ControlledIconGallery = withControlPanel(useAttributes)(
 	IconGallery
 );
 

@@ -34,7 +34,7 @@ export const ToolbarWrapper = styled.div`
 export const ToolbarBase = styled.div`
 	${animationStyles};
 	${size};
-	display: inline-flex;
+	display: flex;
 	border-radius: 2px;
 	border: 1px solid black;
 	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
@@ -66,7 +66,12 @@ export const Group = styled.div`
 	padding: 4px;
 	vertical-align: middle;
 
-	${({ isLast }) => isLast && `border-right: none;`}
+	${({ isLast }) =>
+		isLast &&
+		css`
+			border-right: none;
+			margin-left: auto;
+		`}
 `;
 Group.defaultProps = {
 	className: "ToolbarGroup"

@@ -8,7 +8,7 @@ import IconButton from "../../components/icon-button";
 import { View } from "../../components/view";
 import { Text } from "../../components/text";
 
-function useCreateAttributes() {
+function useAttributes() {
 	const { useText } = useKnobs();
 	return {
 		buttonMainColor: useText("buttonMainColor", "#3e58e1")
@@ -79,8 +79,8 @@ function Label(props) {
 	);
 }
 
-export const ControlledIconButtonGallery = withControlPanel(
-	useCreateAttributes
-)(IconGallery);
+export const ControlledIconButtonGallery = withControlPanel(useAttributes)(
+	IconGallery
+);
 
 export default IconGallery;

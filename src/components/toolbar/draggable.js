@@ -2,7 +2,9 @@ import React from "react";
 import { Rnd } from "react-rnd";
 
 export function Draggable(props) {
-	const { children } = props;
+	const { children, disableDragging } = props;
+
+	if (disableDragging) return children;
 
 	return (
 		<Rnd

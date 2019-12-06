@@ -4,7 +4,7 @@ import { withControlPanel, useKnobs } from "../control-panel";
 import { ControlledToolbar as Toolbar } from "../toolbar";
 import { BlockWrapper, ToolbarWrapper, ContentWrapper } from "./styles";
 
-function useCreateAttributes() {
+function useAttributes() {
 	const { useNumber } = useKnobs();
 
 	return {
@@ -109,6 +109,6 @@ function useSelectedState(ref) {
 	return [isSelected, setIsSelected];
 }
 
-export const ControlledBlock = withControlPanel(useCreateAttributes)(Block);
+export const ControlledBlock = withControlPanel(useAttributes)(Block);
 
 export default Block;

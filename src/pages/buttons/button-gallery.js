@@ -11,7 +11,7 @@ const buttonFonts = {
 		' -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif'
 };
 
-function useCreateAttributes() {
+function useAttributes() {
 	const { useSelect, useText } = useKnobs();
 	return {
 		buttonContent: useText("buttonContent", "Button"),
@@ -134,7 +134,7 @@ export function ButtonGallery(props) {
 	);
 }
 
-export const ControlledButtonGallery = withControlPanel(useCreateAttributes)(
+export const ControlledButtonGallery = withControlPanel(useAttributes)(
 	ButtonGallery
 );
 

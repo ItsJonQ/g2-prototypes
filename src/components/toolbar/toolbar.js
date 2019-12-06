@@ -17,7 +17,7 @@ import { DragHandle } from "./drag-handle";
 
 // CONFIGS
 // Play with these!
-function useCreateAttributes() {
+function useAttributes() {
 	const { useBoolean, useText, useNumber } = useKnobs();
 
 	return {
@@ -164,6 +164,6 @@ export function Toolbar(props) {
 	);
 }
 
-export const ControlledToolbar = withControlPanel(useCreateAttributes)(Toolbar);
+export const ControlledToolbar = withControlPanel(useAttributes)(Toolbar);
 
 export default Toolbar;

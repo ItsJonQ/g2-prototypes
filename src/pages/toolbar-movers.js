@@ -5,6 +5,7 @@ import {
 	DragHandleWrapper,
 	ArrowWrappers
 } from "../components/toolbar/drag-handle";
+import { DualArrowDragHandle } from "../components/toolbar/dual-arrow-drag-handle";
 import { Icon } from "../components/icon";
 import { Page } from "../components/page";
 import { Text } from "../components/text";
@@ -51,65 +52,11 @@ function CombinedArrowDragHandle(props) {
 		</DragHandleWrapper>
 	);
 }
-
-function DualArrowDragHandle(props) {
-	const { isDragging } = props;
-	const [isPressedLeft, setIsPressedLeft] = useState(false);
-	const isPressedRight = !isPressedLeft;
-
-	const setLeft = () => {
-		setIsPressedLeft(true);
-	};
-
-	const setRight = () => {
-		setIsPressedLeft(false);
-	};
-
-	const isLeftDragging = isPressedLeft && isDragging;
-	const isRightDragging = isPressedRight && isDragging;
-
-	return (
-		<DragHandleWrapper {...props}>
-			<LeftArrowWrapper>
-				<ArrowWrappers
-					{...props}
-					onMouseDown={setLeft}
-					isDragging={isPressedLeft && isDragging}
-					isWithBorder
-					className="drag-arrow"
-				>
-					{isLeftDragging ? (
-						<Icon icon="mover-dragged" />
-					) : (
-						<Icon icon="chevron-up" />
-					)}
-				</ArrowWrappers>
-			</LeftArrowWrapper>
-			<ArrowWrappers
-				{...props}
-				onMouseDown={setRight}
-				isDragging={isPressedRight && isDragging}
-				className="drag-arrow"
-			>
-				{isRightDragging ? (
-					<Icon icon="mover-dragged" />
-				) : (
-					<Icon icon="chevron-down" />
-				)}
-			</ArrowWrappers>
-		</DragHandleWrapper>
-	);
-}
-
 const CombinedArrowIconWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 48px;
-`;
-
-const LeftArrowWrapper = styled.div`
-	padding-right: 12px;
 `;
 
 export default ToolbarMovers;
