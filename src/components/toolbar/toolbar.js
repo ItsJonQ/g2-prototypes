@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "emotion-theming";
+import { useDebouncedCallback } from "use-debounce";
 
 import { Slider, ToolbarWrapper, ToolbarBase, Group, Item } from "./styles";
 import { withControlPanel, useKnobs } from "../control-panel";
@@ -17,6 +18,7 @@ function useCreateAttributes() {
 		alwaysShowMover: useBoolean("alwaysShowMover", false),
 		animationSpeed: useNumber("animationSpeed", 100),
 		animationEasing: useText("animationEasing", "linear"),
+		collapseDebounceTiming: useNumber("collapseDebounceTiming", 300),
 		hoverAnimationSpeed: useNumber("hoverAnimationSpeed", 0),
 		interactionColor: useText("interactionColor", "#3E58E1"),
 		size: useNumber("size", 40)
@@ -40,19 +42,19 @@ function useCreateAttributes() {
 export function Toolbar(props) {
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 	const [isActive, setIsActive] = useState(props.isActive);
-	const { alwaysShowMover } = props.attributes;
+	const { alwaysShowMover, collapseDebounceTiming } = props.attributes;
 
 	const expand = () => {
 		setIsExpanded(true);
 		setIsActive(true);
 	};
 
-	const collapse = () => {
+	const [collapse] = useDebouncedCallback(() => {
 		if (!props.isExpanded) {
 			setIsExpanded(false);
 		}
 		setIsActive(false);
-	};
+	}, collapseDebounceTiming);
 
 	const theme = {
 		...props.attributes
