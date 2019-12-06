@@ -19,9 +19,25 @@ export function Block(props) {
 	const ref = useRef(null);
 	const [showToolbar, setShowToolbar] = useState(false);
 	const [isSelected, setIsSelected] = useSelectedState(ref);
+	const [position, setPosition] = useState({ x: 0, y: 0 });
+	const [isDragging, setIsDragging] = useState(false);
 
 	const theme = {
 		...props.attributes
+	};
+
+	const onDrag = event => {
+		const { movementX, movementY } = event;
+		const nextPosition = {
+			x: position.x + movementX,
+			y: position.y + movementY
+		};
+		setPosition(nextPosition);
+	};
+
+	const contentStyle = {
+		opacity: isDragging ? 0.5 : 1,
+		transform: `translate(${position.x}px, ${position.y}px)`
 	};
 
 	return (
@@ -33,9 +49,14 @@ export function Block(props) {
 				ref={ref}
 			>
 				<ToolbarWrapper showToolbar={showToolbar}>
-					<Toolbar isExpanded />
+					<Toolbar
+						isExpanded
+						onDrag={onDrag}
+						onDragStart={() => setIsDragging(true)}
+						onDragStop={() => setIsDragging(false)}
+					/>
 				</ToolbarWrapper>
-				<ContentWrapper isSelected={isSelected}>
+				<ContentWrapper isSelected={isSelected} style={contentStyle}>
 					<p
 						contentEditable={true}
 						spellCheck="false"

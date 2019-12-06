@@ -55,13 +55,23 @@ export function Toolbar(props) {
 	const dragHandleRef = useRef(null);
 
 	const { alwaysShowMover, collapseDebounceTiming } = props.attributes;
-	const { renderDragHandle } = props;
+	const { onDragStart, onDragStop, renderDragHandle } = props;
 
 	useEffect(() => {
 		if (dragHandleRef.current) {
 			setDragHandleWidth(dragHandleRef.current.offsetWidth);
 		}
 	}, [dragHandleRef, setDragHandleWidth]);
+
+	const handleOnDragStart = props => {
+		setIsDragging(true);
+		onDragStart && onDragStart(props);
+	};
+
+	const handleOnDragStop = props => {
+		setIsDragging(false);
+		onDragStop && onDragStop(props);
+	};
 
 	const expand = () => {
 		setIsExpanded(true);
@@ -91,8 +101,8 @@ export function Toolbar(props) {
 	return (
 		<Draggable
 			{...props}
-			onDragStart={() => setIsDragging(true)}
-			onDragStop={() => setIsDragging(false)}
+			onDragStart={handleOnDragStart}
+			onDragStop={handleOnDragStop}
 		>
 			<ThemeProvider theme={theme}>
 				<ToolbarWrapper
