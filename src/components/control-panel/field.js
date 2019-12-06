@@ -6,12 +6,16 @@ import { toNumber } from "./utils";
 export function Field(props) {
 	const { label, value, onChange, type, ...restProps } = props;
 	const isNumber = isValueNumber(type);
+	const isBoolean = isValueBoolean(type);
 	const InputComponent = InputComponents[type];
 
 	if (!InputComponent) return null;
 
 	const handleOnChange = event => {
-		const nextRawValue = event.target.value;
+		const nextRawValue = isBoolean
+			? event.target.checked
+			: event.target.value;
+
 		const nextValue = isNumber ? toNumber(nextRawValue) : nextRawValue;
 		onChange(nextValue);
 	};
@@ -33,7 +37,8 @@ function TextInput(props) {
 }
 
 function BooleanInput(props) {
-	return <Input {...props} type="checkbox" />;
+	const { value, ...restProps } = props;
+	return <Input {...restProps} checked={value} type="checkbox" />;
 }
 
 function NumberInput(props) {
@@ -73,6 +78,10 @@ const InputComponents = {
 
 function isValueNumber(type) {
 	return type === "number" || type === "range";
+}
+
+function isValueBoolean(type) {
+	return type === "boolean";
 }
 
 function mapOptionsToItems(options) {

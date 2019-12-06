@@ -19,12 +19,19 @@ export const ControlBox = styled.div`
 	position: fixed;
 	top: 56px;
 	right: 8px;
+	z-index: 1000;
 `;
 
 export const Input = styled.input`
 	width: 100%;
 	font-family: inherit;
 	border: 1px solid black;
+
+	&[type="checkbox"] {
+		cursor: pointer;
+		margin: 0;
+		display: block;
+	}
 `;
 
 export const Select = styled.select`

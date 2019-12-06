@@ -1,19 +1,13 @@
 import React from "react";
 import { is } from "@itsjonq/is";
 import { useControlPanelContext } from "./context";
-import { Controls } from "./controls";
 import { useResetOnUnmount } from "./actions";
 import { mapStateToProps } from "./utils";
 
 export function ControlPanel({ children }) {
 	useResetOnUnmount();
 
-	return (
-		<>
-			<Controls />
-			{children}
-		</>
-	);
+	return children;
 }
 
 export function withControlPanel(attributes = {}) {

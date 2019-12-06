@@ -8,6 +8,8 @@ export function Controls() {
 	const { updateAttribute } = useControlPanelContext();
 	const items = useItems();
 
+	if (!items.length) return null;
+
 	return (
 		<ControlBox>
 			<View mb={2}>

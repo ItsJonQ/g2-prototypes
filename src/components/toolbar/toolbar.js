@@ -10,9 +10,10 @@ import { DragHandle } from "./drag-handle";
 // CONFIGS
 // Play with these!
 function useCreateAttributes() {
-	const { useText, useNumber } = useKnobs();
+	const { useBoolean, useText, useNumber } = useKnobs();
 
 	return {
+		alwaysShowMover: useBoolean("alwaysShowMover", false),
 		animationSpeed: useNumber("animationSpeed", 100),
 		animationEasing: useText("animationEasing", "linear"),
 		hoverAnimationSpeed: useNumber("hoverAnimationSpeed", 0),
@@ -38,6 +39,7 @@ function useCreateAttributes() {
 export function Toolbar(props) {
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 	const [isActive, setIsActive] = useState(props.isActive);
+	const { alwaysShowMover } = props.attributes;
 
 	const expand = () => {
 		setIsExpanded(true);
@@ -55,6 +57,8 @@ export function Toolbar(props) {
 		...props.attributes
 	};
 
+	const showDragHandle = alwaysShowMover || isExpanded;
+
 	return (
 		<Draggable>
 			<ThemeProvider theme={theme}>
@@ -65,8 +69,8 @@ export function Toolbar(props) {
 					className="editor-toolbar"
 				>
 					<DragHandle
-						isActive={isActive}
-						isExpanded={isExpanded}
+						isActive={showDragHandle}
+						isExpanded={showDragHandle}
 						onMouseLeave={props.onMouseLeave}
 					/>
 					<ToolbarBase isActive={isActive} isExpanded={isExpanded}>

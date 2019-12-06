@@ -3,6 +3,7 @@ import { ControlPanelContext } from "./context";
 import { reducer } from "./reducer";
 import { useAddAttribute, useResetAttributes } from "./actions";
 import { toNumber } from "./utils";
+import { Controls } from "./controls";
 
 const KNOB_TYPE = {
 	boolean: "boolean",
@@ -106,7 +107,10 @@ export function ControlPanelProvider({ children }) {
 
 	return (
 		<ControlPanelContext.Provider value={contextProps}>
-			<>{children}</>
+			<>
+				<Controls />
+				{children}
+			</>
 		</ControlPanelContext.Provider>
 	);
 }
