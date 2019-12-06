@@ -81,9 +81,11 @@ function useSelectedState(ref) {
 			return;
 		}
 
+		const targetNode = node.parentElement;
+
 		const handleOnBodyClick = event => {
 			const { target } = event;
-			if (!node.contains(target) && node !== target) {
+			if (!targetNode.contains(target) && targetNode !== target) {
 				setIsSelected(false);
 			}
 		};
