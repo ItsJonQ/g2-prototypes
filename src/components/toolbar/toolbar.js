@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
 
-import { Slider, ToolbarWrapper, ToolbarBase, Group, Item } from "./styles";
+import {
+	DragHandlerSliderWrapper,
+	Slider,
+	ToolbarWrapper,
+	ToolbarBase,
+	Group,
+	Item
+} from "./styles";
 import { withControlPanel, useKnobs } from "../control-panel";
 import { Icon } from "../icon";
 import { Draggable } from "./draggable";
@@ -15,7 +22,7 @@ function useCreateAttributes() {
 
 	return {
 		showMouseTrail: useBoolean("showMouseTrail", false),
-		alwaysShowMover: useBoolean("alwaysShowMover", false),
+		alwaysShowMover: useBoolean("alwaysShowMover", true),
 		animationSpeed: useNumber("animationSpeed", 100),
 		animationEasing: useText("animationEasing", "linear"),
 		collapseDebounceTiming: useNumber("collapseDebounceTiming", 300),
@@ -42,7 +49,19 @@ function useCreateAttributes() {
 export function Toolbar(props) {
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 	const [isActive, setIsActive] = useState(props.isActive);
+	const [isDragging, setIsDragging] = useState(false);
+	const [dragHandleWidth, setDragHandleWidth] = useState(0);
+
+	const dragHandleRef = useRef(null);
+
 	const { alwaysShowMover, collapseDebounceTiming } = props.attributes;
+	const { renderDragHandle } = props;
+
+	useEffect(() => {
+		if (dragHandleRef.current) {
+			setDragHandleWidth(dragHandleRef.current.offsetWidth);
+		}
+	}, [dragHandleRef, setDragHandleWidth]);
 
 	const expand = () => {
 		setIsExpanded(true);
@@ -62,8 +81,19 @@ export function Toolbar(props) {
 
 	const showDragHandle = alwaysShowMover || isExpanded;
 
+	const renderDragHandleProps = {
+		isActive: showDragHandle,
+		isDragging,
+		showDragHandle,
+		onMouseLeave: props.onMouseLeave
+	};
+
 	return (
-		<Draggable>
+		<Draggable
+			{...props}
+			onDragStart={() => setIsDragging(true)}
+			onDragStop={() => setIsDragging(false)}
+		>
 			<ThemeProvider theme={theme}>
 				<ToolbarWrapper
 					{...props}
@@ -71,12 +101,21 @@ export function Toolbar(props) {
 					onMouseLeave={collapse}
 					className="editor-toolbar"
 				>
-					<DragHandle
+					<DragHandlerSliderWrapper
+						ref={dragHandleRef}
 						isActive={showDragHandle}
-						isExpanded={showDragHandle}
-						onMouseLeave={props.onMouseLeave}
-					/>
-					<ToolbarBase isActive={isActive} isExpanded={isExpanded}>
+						innerWidth={dragHandleWidth}
+					>
+						{renderDragHandle ? (
+							renderDragHandle(renderDragHandleProps)
+						) : (
+							<DragHandle {...renderDragHandleProps} />
+						)}
+					</DragHandlerSliderWrapper>
+					<ToolbarBase
+						isActive={showDragHandle || isActive}
+						isExpanded={isExpanded}
+					>
 						<Group>
 							<Item isPrimaryAction>
 								<Icon icon="block-paragraph" />

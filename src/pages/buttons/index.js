@@ -2,7 +2,7 @@ import React from "react";
 import { Page } from "../../components/page";
 import { ControlledButtonGallery } from "./button-gallery";
 
-export function ButtonsPage() {
+export function Buttons() {
 	return (
 		<Page title="Buttons">
 			<ControlledButtonGallery />
@@ -10,4 +10,4 @@ export function ButtonsPage() {
 	);
 }
 
-export default ButtonsPage;
+export default Buttons;

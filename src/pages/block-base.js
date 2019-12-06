@@ -2,7 +2,7 @@ import React from "react";
 import { ControlledBlock } from "../components/block";
 import { Page } from "../components/page";
 
-export function BlockBasePage() {
+export function BlockBase() {
 	return (
 		<Page title="Block Base">
 			<ControlledBlock />
@@ -10,4 +10,4 @@ export function BlockBasePage() {
 	);
 }
 
-export default BlockBasePage;
+export default BlockBase;

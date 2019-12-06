@@ -2,7 +2,7 @@ import React from "react";
 import { Page } from "../../components/page";
 import { ControlledIconGallery } from "./icon-gallery";
 
-export function IconsPage() {
+export function Icons() {
 	return (
 		<Page title="Icons">
 			<ControlledIconGallery />
@@ -10,4 +10,4 @@ export function IconsPage() {
 	);
 }
 
-export default IconsPage;
+export default Icons;

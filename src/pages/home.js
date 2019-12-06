@@ -5,7 +5,7 @@ import { Page } from "../components/page";
 import { Text } from "../components/text";
 import { View } from "../components/view";
 
-export function HomePage() {
+export function Home() {
 	return (
 		<Page title="Prototypes">
 			<Divider />
@@ -35,6 +35,7 @@ export function HomePage() {
 
 			<Section title="Select a prototype:">
 				<Link to="/toolbar-base">Toolbar (Base)</Link>
+				<Link to="/toolbar-movers">Toolbar (Movers)</Link>
 				<Link to="/block-base">Block x Toolbar (Base)</Link>
 			</Section>
 
@@ -71,4 +72,4 @@ const Section = ({ title, children }) => {
 	);
 };
 
-export default HomePage;
+export default Home;
