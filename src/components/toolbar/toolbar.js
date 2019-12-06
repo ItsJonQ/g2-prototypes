@@ -13,6 +13,7 @@ function useCreateAttributes() {
 	const { useBoolean, useText, useNumber } = useKnobs();
 
 	return {
+		showMouseTrail: useBoolean("showMouseTrail", false),
 		alwaysShowMover: useBoolean("alwaysShowMover", false),
 		animationSpeed: useNumber("animationSpeed", 100),
 		animationEasing: useText("animationEasing", "linear"),

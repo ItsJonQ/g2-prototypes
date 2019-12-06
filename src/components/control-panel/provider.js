@@ -4,6 +4,7 @@ import { reducer } from "./reducer";
 import { useAddAttribute, useResetAttributes } from "./actions";
 import { toNumber } from "./utils";
 import { Controls } from "./controls";
+import { MouseTrail } from "../mouse-trail";
 
 const KNOB_TYPE = {
 	boolean: "boolean",
@@ -105,14 +106,24 @@ export function ControlPanelProvider({ children }) {
 		useText
 	};
 
+	const showMouseTrail = shouldShowMouseTrail(state);
+
 	return (
 		<ControlPanelContext.Provider value={contextProps}>
 			<>
 				<Controls />
+				{showMouseTrail ? <MouseTrail /> : null}
 				{children}
 			</>
 		</ControlPanelContext.Provider>
 	);
+}
+
+function shouldShowMouseTrail(state = []) {
+	if (!state.length) return false;
+	const option = state.find(item => item.prop === "showMouseTrail");
+
+	return !!(option && option.value);
 }
 
 export default ControlPanelProvider;
