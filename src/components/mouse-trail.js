@@ -66,7 +66,7 @@ class Canvas extends React.Component {
 
 		const animatePoints = () => {
 			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-			const duration = (0.8 * (1 * 1000)) / 60; // Last 80% of a frame per point
+			const duration = (0.7 * (2.5 * 1000)) / 60; // Last 80% of a frame per point
 
 			for (let i = 0; i < points.length; ++i) {
 				const point = points[i];
@@ -126,6 +126,7 @@ class Canvas extends React.Component {
 					left: 0,
 					bottom: 0,
 					right: 0,
+					opacity: 0.5,
 					zIndex: 100
 				}}
 			/>
