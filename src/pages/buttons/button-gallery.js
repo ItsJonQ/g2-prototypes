@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "@itsjonq/elm";
-import { withControlPanel, useKnobs } from "../../components/control-panel";
+// import { withControlPanel, useKnobs } from "../../components/control-panel";
 import { Button } from "../../components/button";
 import { View } from "../../components/view";
 import { Text } from "../../components/text";
@@ -11,21 +11,21 @@ const buttonFonts = {
 		' -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif'
 };
 
-function useAttributes() {
-	const { useSelect, useText } = useKnobs();
-	return {
-		buttonContent: useText("buttonContent", "Button"),
-		buttonFontFamily: useSelect(
-			"buttonFontFamily",
-			{
-				Cabin: "cabin",
-				System: "system"
-			},
-			"cabin"
-		),
-		buttonMainColor: useText("buttonMainColor", "#3e58e1")
-	};
-}
+// function useAttributes() {
+// 	const { useSelect, useText } = useKnobs();
+// 	return {
+// 		buttonContent: useText("buttonContent", "Button"),
+// 		buttonFontFamily: useSelect(
+// 			"buttonFontFamily",
+// 			{
+// 				Cabin: "cabin",
+// 				System: "system"
+// 			},
+// 			"cabin"
+// 		),
+// 		buttonMainColor: useText("buttonMainColor", "#3e58e1")
+// 	};
+// }
 
 function ButtonSample(props) {
 	const {
@@ -137,5 +137,7 @@ export function ButtonGallery(props) {
 export const ControlledButtonGallery = withControlPanel(useAttributes)(
 	ButtonGallery
 );
+
+export const ControlledButtonGallery = ButtonGallery;
 
 export default ButtonGallery;

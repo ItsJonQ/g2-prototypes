@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ThemeProvider } from "emotion-theming";
-import { withControlPanel, useKnobs } from "../control-panel";
+import { useControlPanel } from "@itsjonq/controls";
+
+import { withControlPanel } from "../control-panel";
 import { ControlledToolbar as Toolbar } from "../toolbar";
 import { BlockWrapper, ToolbarWrapper, ContentWrapper } from "./styles";
 
 function useAttributes() {
-	const { useNumber } = useKnobs();
+	const { number, attributeProps } = useControlPanel();
 
-	return {
-		blockBorderAnimationSpeed: useNumber("blockBorderAnimationSpeed", 0),
-		// alwaysHideBlockBorder: useBoolean("alwaysHideBlockBorder", true),
-		toolbarFadeAnimationSpeed: useNumber("toolbarFadeAnimationSpeed", 220),
-		toolbarTopOffset: useNumber("toolbarTopOffset", -40)
-	};
+	number("blockBorderAnimationSpeed", 0);
+	number("toolbarFadeAnimationSpeed", 220);
+	number("toolbarTopOffset", -40);
+
+	return attributeProps;
 }
 
 export function Block(props) {

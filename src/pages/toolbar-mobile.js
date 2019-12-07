@@ -1,24 +1,20 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { withControlPanel, useKnobs } from "../components/control-panel";
+import { useControlPanel } from "@itsjonq/controls";
+
+import { withControlPanel } from "../components/control-panel";
 import { ControlledToolbar } from "../components/toolbar";
 import { DualArrowDragHandle } from "../components/toolbar/dual-arrow-drag-handle";
 import { Phone } from "../components/phone";
 import { Page } from "../components/page";
 
 function useAttributes() {
-	const { useNumber } = useKnobs();
+	const { number, attributeProps } = useControlPanel();
 
-	return {
-		toolbarRevealAnimationSpeed: useNumber(
-			"toolbarRevealAnimationSpeed",
-			200
-		),
-		toolbarRevealAnimationDelay: useNumber(
-			"toolbarRevealAnimationDelay",
-			200
-		)
-	};
+	number("toolbarRevealAnimationSpeed", 200);
+	number("toolbarRevealAnimationDelay", 200);
+
+	return attributeProps;
 }
 
 export function BaseToolbarMobile(props) {

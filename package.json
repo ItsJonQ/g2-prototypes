@@ -8,6 +8,7 @@
     "@emotion/core": "10.0.22",
     "@emotion/styled": "10.0.23",
     "@hot-loader/react-dom": "16.11.0",
+    "@itsjonq/controls": "0.0.2",
     "@itsjonq/elm": "0.0.6",
     "@itsjonq/is": "0.0.2",
     "@wordpress/components": "8.4.0",

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
+import { useControlPanel } from "@itsjonq/controls";
 
 import {
 	DragHandlerSliderWrapper,
@@ -10,7 +11,7 @@ import {
 	Group,
 	Item
 } from "./styles";
-import { withControlPanel, useKnobs } from "../control-panel";
+import { withControlPanel } from "../control-panel";
 import { Icon } from "../icon";
 import { Draggable } from "./draggable";
 import { DragHandle } from "./drag-handle";
@@ -18,18 +19,18 @@ import { DragHandle } from "./drag-handle";
 // CONFIGS
 // Play with these!
 function useAttributes() {
-	const { useBoolean, useText, useNumber } = useKnobs();
+	const { boolean, color, number, text, attributeProps } = useControlPanel();
 
-	return {
-		showMouseTrail: useBoolean("showMouseTrail", false),
-		alwaysShowMover: useBoolean("alwaysShowMover", true),
-		animationSpeed: useNumber("animationSpeed", 100),
-		animationEasing: useText("animationEasing", "linear"),
-		collapseDebounceTiming: useNumber("collapseDebounceTiming", 300),
-		hoverAnimationSpeed: useNumber("hoverAnimationSpeed", 0),
-		interactionColor: useText("interactionColor", "#3E58E1"),
-		size: useNumber("size", 40)
-	};
+	boolean("showMouseTrail", false);
+	boolean("alwaysShowMover", true);
+	number("animationSpeed", 100);
+	text("animationEasing", "linear");
+	number("collapseDebounceTiming", 300);
+	number("hoverAnimationSpeed", 100);
+	color("interactionColor", "#3E58E1");
+	number("size", 40);
+
+	return attributeProps;
 }
 
 /**
