@@ -19,7 +19,7 @@ import { DragHandle } from "./drag-handle";
 // CONFIGS
 // Play with these!
 function useAttributes() {
-	const { boolean, color, number, text, attributeProps } = useControlPanel();
+	const { boolean, color, number, text } = useControlPanel();
 
 	boolean("showMouseTrail", false);
 	boolean("alwaysShowMover", true);
@@ -29,8 +29,6 @@ function useAttributes() {
 	number("hoverAnimationSpeed", 100);
 	color("interactionColor", "#3E58E1");
 	number("size", 40);
-
-	return attributeProps;
 }
 
 /**
@@ -56,7 +54,7 @@ export function Toolbar(props) {
 	const dragHandleRef = useRef(null);
 
 	const { alwaysShowMover, collapseDebounceTiming } = props.attributes;
-	const { onDragStart, onDragStop, renderDragHandle } = props;
+	const { onDragStart, onDragStop, renderDragHandle, ...restProps } = props;
 
 	useEffect(() => {
 		if (dragHandleRef.current) {
@@ -107,7 +105,7 @@ export function Toolbar(props) {
 		>
 			<ThemeProvider theme={theme}>
 				<ToolbarWrapper
-					{...props}
+					{...restProps}
 					onMouseEnter={expand}
 					onMouseLeave={collapse}
 					className="editor-toolbar"

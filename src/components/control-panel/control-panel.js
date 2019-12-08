@@ -1,21 +1,17 @@
 import React from "react";
+import { useControlPanel } from "@itsjonq/controls";
 import { is } from "@itsjonq/is";
-import { useResetOnUnmount } from "./actions";
 
 export function withControlPanel(attributes = {}) {
 	return WrappedComponent => {
 		return props => {
-			useResetOnUnmount();
-			const controlAttributes = is.function(attributes)
-				? attributes()
-				: attributes;
-
+			const { attributeProps } = useControlPanel();
+			if (is.function(attributes)) {
+				attributes();
+			}
 			return (
 				<>
-					<WrappedComponent
-						{...props}
-						attributes={controlAttributes}
-					/>
+					<WrappedComponent {...props} attributes={attributeProps} />
 				</>
 			);
 		};

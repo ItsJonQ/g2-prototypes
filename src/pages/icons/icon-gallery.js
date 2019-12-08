@@ -1,27 +1,27 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useControlPanel } from "@itsjonq/controls";
 
-import { withControlPanel, useKnobs } from "../../components/control-panel";
+import { withControlPanel } from "../../components/control-panel";
 import * as Icons from "../../components/icons";
 import { Text } from "../../components/text";
 
 function useAttributes() {
-	const { useRange, useText } = useKnobs();
-	return {
-		iconColor: useText("iconColor", "black"),
-		iconScale: useRange("iconScale", 1, {
-			step: 0.25,
-			min: 0.5,
-			max: 3
-		})
-	};
+	const { range, text } = useControlPanel();
+
+	text("iconColor", "black");
+	range("iconScale", 1, {
+		step: 0.25,
+		min: 0.5,
+		max: 3
+	});
 }
 
 export function IconGallery(props) {
 	const { attributes } = props;
 	const { iconColor, iconScale } = attributes;
 	const items = Object.keys(Icons);
-	const iconSize = 24 * iconScale;
+	const iconSize = iconScale ? 24 * iconScale : 0;
 
 	return (
 		<Grid>

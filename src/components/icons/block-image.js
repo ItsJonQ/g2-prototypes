@@ -25,7 +25,7 @@ export function BlockImageIcon(props) {
 					stroke="#1E1E1E"
 					strokeWidth="1.5"
 					strokeLinecap="round"
-					stroke-linejoin="bevel"
+					strokeLinejoin="bevel"
 				/>
 			</svg>
 		</IconWrapper>

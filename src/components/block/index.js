@@ -7,13 +7,11 @@ import { ControlledToolbar as Toolbar } from "../toolbar";
 import { BlockWrapper, ToolbarWrapper, ContentWrapper } from "./styles";
 
 function useAttributes() {
-	const { number, attributeProps } = useControlPanel();
+	const { number } = useControlPanel();
 
 	number("blockBorderAnimationSpeed", 0);
 	number("toolbarFadeAnimationSpeed", 220);
 	number("toolbarTopOffset", -40);
-
-	return attributeProps;
 }
 
 export function Block(props) {

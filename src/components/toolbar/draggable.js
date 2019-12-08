@@ -2,7 +2,13 @@ import React from "react";
 import { Rnd } from "react-rnd";
 
 export function Draggable(props) {
-	const { children, disableDragging } = props;
+	const {
+		children,
+		disableDragging,
+		isExpanded,
+		renderDragHandle,
+		...restProps
+	} = props;
 
 	if (disableDragging) return children;
 
@@ -11,7 +17,7 @@ export function Draggable(props) {
 			dragHandleClassName="drag-handle"
 			enableResizing={false}
 			bounds="window"
-			{...props}
+			{...restProps}
 		>
 			{children}
 		</Rnd>

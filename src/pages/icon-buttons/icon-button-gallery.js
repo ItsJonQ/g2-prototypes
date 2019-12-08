@@ -1,18 +1,18 @@
 import React from "react";
-import { Flex } from "@itsjonq/elm";
 import { kebabCase } from "lodash";
+import { Flex } from "@itsjonq/elm";
+import { useControlPanel } from "@itsjonq/controls";
 
-import { withControlPanel, useKnobs } from "../../components/control-panel";
+import { withControlPanel } from "../../components/control-panel";
 import * as Icons from "../../components/icons";
 import IconButton from "../../components/icon-button";
 import { View } from "../../components/view";
 import { Text } from "../../components/text";
 
 function useAttributes() {
-	const { useText } = useKnobs();
-	return {
-		buttonMainColor: useText("buttonMainColor", "#3e58e1")
-	};
+	const { text } = useControlPanel();
+
+	text("buttonMainColor", "#3e58e1");
 }
 
 export function IconGallery(props) {

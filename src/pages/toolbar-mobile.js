@@ -9,12 +9,10 @@ import { Phone } from "../components/phone";
 import { Page } from "../components/page";
 
 function useAttributes() {
-	const { number, attributeProps } = useControlPanel();
+	const { number } = useControlPanel();
 
 	number("toolbarRevealAnimationSpeed", 200);
 	number("toolbarRevealAnimationDelay", 200);
-
-	return attributeProps;
 }
 
 export function BaseToolbarMobile(props) {

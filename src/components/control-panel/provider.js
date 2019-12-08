@@ -1,6 +1,5 @@
 import React from "react";
 import { ControlPanel, useControlPanel } from "@itsjonq/controls";
-import { Controls } from "./controls";
 import { MouseTrail } from "../mouse-trail";
 
 export function ControlPanelProvider({ children }) {
@@ -9,7 +8,6 @@ export function ControlPanelProvider({ children }) {
 	return (
 		<>
 			<ControlPanel top={60} />
-			<Controls />
 			{showMouseTrail ? <MouseTrail /> : null}
 			{children}
 		</>
