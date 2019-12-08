@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { useControlPanel } from "@itsjonq/controls";
+import { useControls } from "@itsjonq/controls";
 
 import { withControlPanel } from "../../components/control-panel";
 import * as Icons from "../../components/icons";
 import { Text } from "../../components/text";
 
 function useAttributes() {
-	const { range, text } = useControlPanel();
+	const { range, text } = useControls();
 
 	text("iconColor", "black");
 	range("iconScale", 1, {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
-import { useControlPanel } from "@itsjonq/controls";
+import { useControls } from "@itsjonq/controls";
 
 import {
 	DragHandlerSliderWrapper,
@@ -19,7 +19,7 @@ import { DragHandle } from "./drag-handle";
 // CONFIGS
 // Play with these!
 function useAttributes() {
-	const { boolean, color, number, text } = useControlPanel();
+	const { boolean, color, number, text } = useControls();
 
 	boolean("showMouseTrail", false);
 	boolean("alwaysShowMover", true);

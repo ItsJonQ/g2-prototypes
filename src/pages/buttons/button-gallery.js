@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "@itsjonq/elm";
-import { useControlPanel } from "@itsjonq/controls";
+import { useControls } from "@itsjonq/controls";
 import { withControlPanel } from "../../components/control-panel";
 import { Button } from "../../components/button";
 import { View } from "../../components/view";
@@ -13,7 +13,7 @@ const buttonFonts = {
 };
 
 function useAttributes() {
-	const { select, text } = useControlPanel();
+	const { select, text } = useControls();
 
 	text("buttonContent", "Button");
 	select(

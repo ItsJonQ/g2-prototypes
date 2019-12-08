@@ -1,7 +1,7 @@
 import React from "react";
 import { kebabCase } from "lodash";
 import { Flex } from "@itsjonq/elm";
-import { useControlPanel } from "@itsjonq/controls";
+import { useControls } from "@itsjonq/controls";
 
 import { withControlPanel } from "../../components/control-panel";
 import * as Icons from "../../components/icons";
@@ -10,7 +10,7 @@ import { View } from "../../components/view";
 import { Text } from "../../components/text";
 
 function useAttributes() {
-	const { text } = useControlPanel();
+	const { text } = useControls();
 
 	text("buttonMainColor", "#3e58e1");
 }

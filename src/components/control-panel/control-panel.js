@@ -1,17 +1,18 @@
 import React from "react";
-import { useControlPanel } from "@itsjonq/controls";
+import { useControls } from "@itsjonq/controls";
 import { is } from "@itsjonq/is";
 
-export function withControlPanel(attributes = {}) {
+export function withControlPanel(useAttributes) {
 	return WrappedComponent => {
 		return props => {
-			const { attributeProps } = useControlPanel();
-			if (is.function(attributes)) {
-				attributes();
+			const { attributes } = useControls();
+			if (is.function(useAttributes)) {
+				useAttributes();
 			}
+
 			return (
 				<>
-					<WrappedComponent {...props} attributes={attributeProps} />
+					<WrappedComponent {...props} attributes={attributes} />
 				</>
 			);
 		};

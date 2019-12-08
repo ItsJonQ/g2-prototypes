@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { useControlPanel } from "@itsjonq/controls";
+import { useControls } from "@itsjonq/controls";
 
 import { withControlPanel } from "../components/control-panel";
 import { ControlledToolbar } from "../components/toolbar";
@@ -9,7 +9,7 @@ import { Phone } from "../components/phone";
 import { Page } from "../components/page";
 
 function useAttributes() {
-	const { number } = useControlPanel();
+	const { number } = useControls();
 
 	number("toolbarRevealAnimationSpeed", 200);
 	number("toolbarRevealAnimationDelay", 200);

@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ThemeProvider } from "emotion-theming";
-import { useControlPanel } from "@itsjonq/controls";
+import { useControls } from "@itsjonq/controls";
 
 import { withControlPanel } from "../control-panel";
 import { ControlledToolbar as Toolbar } from "../toolbar";
 import { BlockWrapper, ToolbarWrapper, ContentWrapper } from "./styles";
 
 function useAttributes() {
-	const { number } = useControlPanel();
-
+	const { number } = useControls();
 	number("blockBorderAnimationSpeed", 0);
 	number("toolbarFadeAnimationSpeed", 220);
 	number("toolbarTopOffset", -40);
