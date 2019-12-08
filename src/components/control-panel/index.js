@@ -1,2 +1,2 @@
-export * from "./control-panel";
+export * from "./with-control-panel";
 export * from "./provider";
