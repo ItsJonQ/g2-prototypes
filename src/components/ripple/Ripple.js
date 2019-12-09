@@ -48,7 +48,7 @@ export function Ripple(props) {
 		<RippleContext.Provider value={contextValue}>
 			<View
 				position="relative"
-				display="inline-block"
+				display="inline-flex"
 				{...props}
 				onClick={handleOnClick}
 			/>
