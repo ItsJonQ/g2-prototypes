@@ -7,15 +7,14 @@ import { useControls } from "@itsjonq/controls";
 import {
 	DragHandlerSliderWrapper,
 	BaseToolbar,
-	BaseToolbarItem,
 	MainToolbar,
 	Group
 } from "./styles";
 import { withControlPanel } from "../control-panel";
-import { Icon } from "../icon";
 import { Draggable } from "./draggable";
 import { DragHandle } from "./drag-handle";
 import { Expander } from "./expander";
+import { ToolbarItem } from "./toolbar-item";
 
 // CONFIGS
 // Play with these!
@@ -157,35 +156,29 @@ export function Toolbar(props) {
 						isExpanded={isExpanded}
 					>
 						<Group>
-							<BaseToolbarItem {...toolbar} isPrimaryAction>
-								<Icon icon="block-paragraph" />
-							</BaseToolbarItem>
+							<ToolbarItem
+								{...toolbar}
+								isPrimaryAction
+								icon="block-paragraph"
+							/>
 						</Group>
 						<Group>
-							<BaseToolbarItem {...toolbar}>
-								<Icon icon="align-left" />
-							</BaseToolbarItem>
+							<ToolbarItem {...toolbar} icon="align-left" />
 						</Group>
 						<Expander isActive={isActive} isExpanded={isExpanded}>
 							<Group>
-								<BaseToolbarItem {...toolbar} onFocus={expand}>
-									<Icon icon="bold" />
-								</BaseToolbarItem>
-								<BaseToolbarItem {...toolbar}>
-									<Icon icon="italic" />
-								</BaseToolbarItem>
-								<BaseToolbarItem {...toolbar}>
-									<Icon icon="link" />
-								</BaseToolbarItem>
-								<BaseToolbarItem {...toolbar}>
-									<Icon icon="chevron-down" />
-								</BaseToolbarItem>
+								<ToolbarItem
+									{...toolbar}
+									onFocus={expand}
+									icon="bold"
+								/>
+								<ToolbarItem {...toolbar} icon="italic" />
+								<ToolbarItem {...toolbar} icon="link" />
+								<ToolbarItem {...toolbar} icon="chevron-down" />
 							</Group>
 						</Expander>
 						<Group isLast>
-							<BaseToolbarItem {...toolbar}>
-								<Icon icon="ellipsis" />
-							</BaseToolbarItem>
+							<ToolbarItem {...toolbar} icon="ellipsis" />
 						</Group>
 					</MainToolbar>
 				</BaseToolbar>

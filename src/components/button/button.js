@@ -3,7 +3,7 @@ import { cx } from "emotion";
 import { ThemeProvider } from "emotion-theming";
 import { mainColor, BaseButton, ButtonContent } from "./style";
 
-export function Button(props) {
+export const Button = React.forwardRef((props, ref) => {
 	const {
 		className,
 		children,
@@ -31,12 +31,17 @@ export function Button(props) {
 
 	return (
 		<ThemeProvider theme={themeProps}>
-			<BaseButton {...restProps} className={classes} disabled={disabled}>
+			<BaseButton
+				{...restProps}
+				className={classes}
+				disabled={disabled}
+				ref={ref}
+			>
 				<ButtonContent>{children}</ButtonContent>
 			</BaseButton>
 		</ThemeProvider>
 	);
-}
+});
 
 Button.defaultProps = {
 	variant: "default"

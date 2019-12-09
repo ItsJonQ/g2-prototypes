@@ -141,7 +141,7 @@ export const Item = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	padding: 4px 10px;
+	padding: 4px;
 	position: relative;
 
 	&:last-child {

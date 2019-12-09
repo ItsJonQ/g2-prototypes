@@ -1,6 +1,7 @@
 import colorUtils from "tinycolor2";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
+import { Button as ReakitButton } from "reakit/Button";
 
 export const mainColor = "#3e58e1";
 export const pressedColor = "#000";
@@ -169,9 +170,11 @@ const iconButton = props => {
 	return css`
 		--buttonFocusColor: ${getButtonFocusColor(color)};
 		border: none;
+		border-radius: 2px;
 		color: black;
 		width: 32px;
-		height: 32px;
+		height: 100%;
+		max-height: 32px;
 		padding: 2px;
 
 		&:focus,
@@ -195,7 +198,7 @@ function getButtonFocusColor(color) {
 		.toHexString();
 }
 
-export const BaseButton = styled("button")`
+export const BaseButton = styled(ReakitButton)`
 	${baseButton};
 	${variant};
 	${size};
