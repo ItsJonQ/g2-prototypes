@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
-import { DragHandleWrapper, ArrowWrappers } from "./drag-handle";
+import { DragHandleWrapper, BaseToolbarArrowItem } from "./drag-handle";
 import { Icon } from "../icon";
 
 export function DualArrowDragHandle(props) {
@@ -21,22 +20,20 @@ export function DualArrowDragHandle(props) {
 
 	return (
 		<DragHandleWrapper {...props}>
-			<LeftArrowWrapper>
-				<ArrowWrappers
-					{...props}
-					onMouseDown={setLeft}
-					isDragging={isPressedLeft && isDragging}
-					isWithBorder
-					className="drag-arrow"
-				>
-					{isLeftDragging ? (
-						<Icon icon="mover-dragged" />
-					) : (
-						<Icon icon="chevron-up" />
-					)}
-				</ArrowWrappers>
-			</LeftArrowWrapper>
-			<ArrowWrappers
+			<BaseToolbarArrowItem
+				{...props}
+				onMouseDown={setLeft}
+				isDragging={isPressedLeft && isDragging}
+				isWithBorder
+				className="drag-arrow"
+			>
+				{isLeftDragging ? (
+					<Icon icon="mover-dragged" />
+				) : (
+					<Icon icon="chevron-up" />
+				)}
+			</BaseToolbarArrowItem>
+			<BaseToolbarArrowItem
 				{...props}
 				onMouseDown={setRight}
 				isDragging={isPressedRight && isDragging}
@@ -47,11 +44,7 @@ export function DualArrowDragHandle(props) {
 				) : (
 					<Icon icon="chevron-down" />
 				)}
-			</ArrowWrappers>
+			</BaseToolbarArrowItem>
 		</DragHandleWrapper>
 	);
 }
-
-const LeftArrowWrapper = styled.div`
-	padding-right: 12px;
-`;

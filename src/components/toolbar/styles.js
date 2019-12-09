@@ -1,3 +1,8 @@
+import React from "react";
+import {
+	Toolbar as ReakitToolbar,
+	ToolbarItem as ReakitToolbarItem
+} from "reakit/Toolbar";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 
@@ -8,6 +13,18 @@ const CONFIG = {
 		sm: 36
 	}
 };
+
+export function BaseToolbar(props) {
+	return <ReakitToolbar {...props} as={ToolbarWrapper} />;
+}
+
+export function BaseToolbarItem(props) {
+	return <ReakitToolbarItem {...props} as={Item} />;
+}
+
+export function BaseToolbarArrowItem(props) {
+	return <ReakitToolbarItem {...props} as={ArrowWrappers} />;
+}
 
 const animationStyles = props => {
 	const { animationEasing, animationSpeed } = props.theme;
@@ -31,7 +48,7 @@ export const ToolbarWrapper = styled.div`
 	border-radius: 2px;
 `;
 
-export const ToolbarBase = styled.div`
+export const MainToolbar = styled.div`
 	${animationStyles};
 	${size};
 	display: flex;
@@ -63,7 +80,6 @@ export const Group = styled.div`
 	display: inline-flex;
 	border-right: 1px solid black;
 	height: 100%;
-	padding: 4px;
 	vertical-align: middle;
 
 	${({ isLast }) =>
@@ -90,8 +106,8 @@ const itemPrimaryStyles = props => {
 			border-bottom: 6px solid currentColor;
 			position: absolute;
 			content: "";
-			bottom: -6px;
-			right: -8px;
+			bottom: -2px;
+			right: -4px;
 			transform: rotate(135deg);
 		}
 	`;
@@ -125,11 +141,16 @@ export const Item = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	padding: 4px 8px;
+	padding: 4px 10px;
 	position: relative;
 
 	&:last-child {
 		border-right: none;
+	}
+
+	&:focus {
+		outline: none;
+		background: rgba(0, 0, 0, 0.1);
 	}
 
 	${itemPrimaryStyles};
@@ -166,21 +187,12 @@ export const Slider = styled.div`
 	${animationStyles};
 	width: 0;
 	overflow: hidden;
-
-	${({ isExpanded }) =>
-		isExpanded &&
-		`
-    width: 153px;
-  `}
 `;
 
 export const ArrowWrappers = styled(Item)`
 	${animationStyles};
 	background: white;
 	position: relative;
-	margin: -4px;
-	height: calc(100% + 8px);
-	width: calc(100% + 12px);
 	padding: 4px 10px;
 
 	.react-draggable:hover & {
@@ -195,6 +207,11 @@ export const ArrowWrappers = styled(Item)`
 			cursor: grabbing !important;
 			background: black;
 			color: white;
+
+			&:focus {
+				background: black;
+				color: white;
+			}
 
 			* {
 				color: white;

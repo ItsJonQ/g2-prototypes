@@ -1,32 +1,39 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useToolbarState } from "reakit/Toolbar";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
 import { useControls } from "@itsjonq/controls";
 
 import {
 	DragHandlerSliderWrapper,
-	Slider,
-	ToolbarWrapper,
-	ToolbarBase,
-	Group,
-	Item
+	BaseToolbar,
+	BaseToolbarItem,
+	MainToolbar,
+	Group
 } from "./styles";
 import { withControlPanel } from "../control-panel";
 import { Icon } from "../icon";
 import { Draggable } from "./draggable";
 import { DragHandle } from "./drag-handle";
+import { Expander } from "./expander";
 
 // CONFIGS
 // Play with these!
 function useAttributes() {
 	const { boolean, color, number, text } = useControls();
 
+	// Debugging
 	boolean("showMouseTrail", false);
 	boolean("alwaysShowMover", true);
+	// Controls
+	boolean("isExpanded", false);
+	// Animations
 	number("animationSpeed", 100);
 	text("animationEasing", "linear");
-	number("collapseDebounceTiming", 300);
+	// Interactions
+	number("collapseDebounceTiming", 500);
 	number("hoverAnimationSpeed", 100);
+	// Visuals
 	color("interactionColor", "#3E58E1");
 	number("size", 40);
 }
@@ -50,10 +57,17 @@ export function Toolbar(props) {
 	const [isActive, setIsActive] = useState(props.isActive);
 	const [isDragging, setIsDragging] = useState(false);
 	const [dragHandleWidth, setDragHandleWidth] = useState(0);
+	const toolbar = useToolbarState();
 
+	const {
+		alwaysShowMover,
+		collapseDebounceTiming,
+		isExpanded: isExpandedProp
+	} = props.attributes;
+
+	const isExpandedRef = useRef(isExpandedProp);
 	const dragHandleRef = useRef(null);
 
-	const { alwaysShowMover, collapseDebounceTiming } = props.attributes;
 	const { onDragStart, onDragStop, renderDragHandle, ...restProps } = props;
 
 	useEffect(() => {
@@ -61,6 +75,13 @@ export function Toolbar(props) {
 			setDragHandleWidth(dragHandleRef.current.offsetWidth);
 		}
 	}, [dragHandleRef, setDragHandleWidth]);
+
+	useEffect(() => {
+		if (isExpandedProp !== isExpandedRef.current) {
+			setIsExpanded(isExpandedProp);
+			isExpandedRef.current = isExpandedProp;
+		}
+	}, [isExpandedProp, isExpandedRef, setIsExpanded]);
 
 	const handleOnDragStart = props => {
 		setIsDragging(true);
@@ -70,6 +91,12 @@ export function Toolbar(props) {
 	const handleOnDragStop = props => {
 		setIsDragging(false);
 		onDragStop && onDragStop(props);
+	};
+
+	const handleOnMouseMove = () => {
+		if (!isExpanded) {
+			expand();
+		}
 	};
 
 	const expand = () => {
@@ -94,7 +121,8 @@ export function Toolbar(props) {
 		isActive: showDragHandle,
 		isDragging,
 		showDragHandle,
-		onMouseLeave: props.onMouseLeave
+		onMouseLeave: props.onMouseLeave,
+		...toolbar
 	};
 
 	return (
@@ -104,9 +132,11 @@ export function Toolbar(props) {
 			onDragStop={handleOnDragStop}
 		>
 			<ThemeProvider theme={theme}>
-				<ToolbarWrapper
+				<BaseToolbar
 					{...restProps}
-					onMouseEnter={expand}
+					{...toolbar}
+					aria-label="G2 Toolbar"
+					onMouseMove={handleOnMouseMove}
 					onMouseLeave={collapse}
 					className="editor-toolbar"
 				>
@@ -114,6 +144,7 @@ export function Toolbar(props) {
 						ref={dragHandleRef}
 						isActive={showDragHandle}
 						innerWidth={dragHandleWidth}
+						className="drag-handler-slider-wrapper"
 					>
 						{renderDragHandle ? (
 							renderDragHandle(renderDragHandleProps)
@@ -121,43 +152,43 @@ export function Toolbar(props) {
 							<DragHandle {...renderDragHandleProps} />
 						)}
 					</DragHandlerSliderWrapper>
-					<ToolbarBase
+					<MainToolbar
 						isActive={showDragHandle || isActive}
 						isExpanded={isExpanded}
 					>
 						<Group>
-							<Item isPrimaryAction>
+							<BaseToolbarItem {...toolbar} isPrimaryAction>
 								<Icon icon="block-paragraph" />
-							</Item>
+							</BaseToolbarItem>
 						</Group>
 						<Group>
-							<Item>
+							<BaseToolbarItem {...toolbar}>
 								<Icon icon="align-left" />
-							</Item>
+							</BaseToolbarItem>
 						</Group>
-						<Slider isActive={isActive} isExpanded={isExpanded}>
+						<Expander isActive={isActive} isExpanded={isExpanded}>
 							<Group>
-								<Item>
+								<BaseToolbarItem {...toolbar} onFocus={expand}>
 									<Icon icon="bold" />
-								</Item>
-								<Item>
+								</BaseToolbarItem>
+								<BaseToolbarItem {...toolbar}>
 									<Icon icon="italic" />
-								</Item>
-								<Item>
+								</BaseToolbarItem>
+								<BaseToolbarItem {...toolbar}>
 									<Icon icon="link" />
-								</Item>
-								<Item>
+								</BaseToolbarItem>
+								<BaseToolbarItem {...toolbar}>
 									<Icon icon="chevron-down" />
-								</Item>
+								</BaseToolbarItem>
 							</Group>
-						</Slider>
+						</Expander>
 						<Group isLast>
-							<Item>
+							<BaseToolbarItem {...toolbar}>
 								<Icon icon="ellipsis" />
-							</Item>
+							</BaseToolbarItem>
 						</Group>
-					</ToolbarBase>
-				</ToolbarWrapper>
+					</MainToolbar>
+				</BaseToolbar>
 			</ThemeProvider>
 		</Draggable>
 	);

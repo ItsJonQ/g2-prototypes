@@ -2,16 +2,16 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Icon } from "../icon";
 
-import { ArrowWrappers, DragSlider, ToolbarBase, Group } from "./styles";
-export { ArrowWrappers, Group } from "./styles";
+import { BaseToolbarArrowItem, DragSlider, MainToolbar, Group } from "./styles";
+export { BaseToolbarArrowItem, Group } from "./styles";
 
 export function DragHandleWrapper(props) {
 	const { children, ...restProps } = props;
 	return (
 		<DragSlider {...restProps}>
-			<ToolbarBase isAside>
+			<MainToolbar isAside>
 				<Group isLast>{children}</Group>
-			</ToolbarBase>
+			</MainToolbar>
 		</DragSlider>
 	);
 }
@@ -21,7 +21,7 @@ export function DragHandle(props) {
 
 	return (
 		<DragHandleWrapper {...props}>
-			<ArrowWrappers {...props}>
+			<BaseToolbarArrowItem {...props}>
 				{isDragging ? (
 					<Icon icon="mover-dragged" />
 				) : (
@@ -37,7 +37,7 @@ export function DragHandle(props) {
 						</IconPlaceholder>
 					</>
 				)}
-			</ArrowWrappers>
+			</BaseToolbarArrowItem>
 		</DragHandleWrapper>
 	);
 }

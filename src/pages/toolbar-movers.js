@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { ControlledToolbar } from "../components/toolbar";
 import {
 	DragHandleWrapper,
-	ArrowWrappers
+	BaseToolbarArrowItem
 } from "../components/toolbar/drag-handle";
 import { DualArrowDragHandle } from "../components/toolbar/dual-arrow-drag-handle";
 import { Icon } from "../components/icon";
@@ -37,7 +37,7 @@ function CombinedArrowDragHandle(props) {
 	const { isDragging } = props;
 	return (
 		<DragHandleWrapper {...props}>
-			<ArrowWrappers {...props}>
+			<BaseToolbarArrowItem {...props}>
 				<CombinedArrowIconWrapper>
 					{isDragging ? (
 						<Icon icon="mover-dragged" />
@@ -48,7 +48,7 @@ function CombinedArrowDragHandle(props) {
 						</>
 					)}
 				</CombinedArrowIconWrapper>
-			</ArrowWrappers>
+			</BaseToolbarArrowItem>
 		</DragHandleWrapper>
 	);
 }
