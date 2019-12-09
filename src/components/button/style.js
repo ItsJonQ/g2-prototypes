@@ -31,7 +31,9 @@ export const baseButtonStyles = {
 	height: 36,
 	lineHeight: 1,
 	padding: "8px 24px",
+	position: "relative",
 	outline: "none",
+	transition: "all 100ms linear",
 	"&[disabled]": {
 		pointerEvents: "none"
 	}
@@ -205,4 +207,16 @@ export const BaseButton = styled(ReakitButton)`
 	${iconButton};
 `;
 
-export const ButtonContent = styled.span``;
+export const ButtonContent = styled.span`
+	position: relative;
+	z-index: 1;
+`;
+
+export const RippleBase = styled.span`
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+`;
