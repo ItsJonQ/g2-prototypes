@@ -10,11 +10,7 @@ export function withControlPanel(useAttributes) {
 				useAttributes();
 			}
 
-			return (
-				<>
-					<WrappedComponent {...props} attributes={attributes} />
-				</>
-			);
+			return <WrappedComponent {...props} attributes={attributes} />;
 		};
 	};
 }

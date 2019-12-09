@@ -8,7 +8,7 @@ export function ControlPanelProvider({ children }) {
 
 	return (
 		<>
-			<Controls top={60} />
+			<Controls top={60} maxHeight="calc(100vh - 66px)" />
 			{showMouseTrail ? <MouseTrail /> : null}
 			{children}
 		</>
