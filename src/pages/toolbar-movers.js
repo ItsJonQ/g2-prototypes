@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { ControlledToolbar } from "../components/toolbar";
+import { Toolbar } from "../components/toolbar";
 import {
 	DragHandleWrapper,
 	BaseToolbarArrowItem
@@ -16,14 +16,14 @@ export function ToolbarMovers() {
 		<Page title="Toolbar Movers">
 			<Text shade="muted">Hover and move the Toolbar around</Text>
 			<View mt={4}>
-				<ControlledToolbar default={{ x: 100, y: 0 }} />
+				<Toolbar default={{ x: 100, y: 0 }} />
 
-				<ControlledToolbar
+				<Toolbar
 					default={{ x: 100, y: 100 }}
 					renderDragHandle={CombinedArrowDragHandle}
 				/>
 
-				<ControlledToolbar
+				<Toolbar
 					default={{ x: 100, y: 200 }}
 					renderDragHandle={DualArrowDragHandle}
 					dragHandleClassName="drag-arrow"

@@ -7,7 +7,7 @@ export function withControlPanel(useAttributes) {
 		return props => {
 			const { attributes } = useControls();
 			if (is.function(useAttributes)) {
-				useAttributes();
+				useAttributes(props);
 			}
 
 			return <WrappedComponent {...props} attributes={attributes} />;

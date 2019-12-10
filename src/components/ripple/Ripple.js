@@ -50,7 +50,7 @@ export function Ripple(props) {
 				position="relative"
 				display="inline-flex"
 				{...props}
-				onClick={handleOnClick}
+				onMouseDown={handleOnClick}
 			/>
 		</RippleContext.Provider>
 	);

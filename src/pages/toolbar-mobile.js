@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useControls } from "@itsjonq/controls";
 
 import { withControlPanel } from "../components/control-panel";
-import { ControlledToolbar } from "../components/toolbar";
+import { Toolbar } from "../components/toolbar";
 import { DualArrowDragHandle } from "../components/toolbar/dual-arrow-drag-handle";
 import { Phone } from "../components/phone";
 import { Page } from "../components/page";
@@ -46,11 +46,11 @@ export function BaseToolbarMobile(props) {
 									transitionDelay: `${toolbarRevealAnimationDelay}ms`
 								}}
 							>
-								<ControlledToolbar
+								<Toolbar
 									default={{ x: 0, y: 0 }}
 									disableDragging={true}
 									isExpanded
-									style={{ marginLeft: 93 }}
+									style={{ marginLeft: 89 }}
 									renderDragHandle={DualArrowDragHandle}
 								/>
 							</ToolbarWrapper>

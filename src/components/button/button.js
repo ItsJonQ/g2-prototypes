@@ -10,7 +10,7 @@ export const Button = React.forwardRef((props, ref) => {
 	const { select, attributes } = useControls();
 
 	select(
-		"clickAnimation",
+		"buttonClickAnimation",
 		{
 			Default: "default",
 			Ripple: "ripple"
@@ -20,7 +20,7 @@ export const Button = React.forwardRef((props, ref) => {
 
 	const {
 		className,
-		clickAnimation: clickAnimationProp,
+		buttonClickAnimation: buttonClickAnimationProp,
 		children,
 		isHovered,
 		isFocused,
@@ -31,7 +31,7 @@ export const Button = React.forwardRef((props, ref) => {
 		...restProps
 	} = props;
 
-	const { clickAnimation } = attributes;
+	const { buttonClickAnimation } = attributes;
 
 	const themeProps = {
 		color: props.color || mainColor,
@@ -47,7 +47,7 @@ export const Button = React.forwardRef((props, ref) => {
 		disabled && "is-disabled"
 	);
 
-	const showRipple = clickAnimation !== "default" || disabled;
+	const showRipple = buttonClickAnimation !== "default" || disabled;
 	const RippleComponent = showRipple ? Ripple : React.Fragment;
 
 	return (
@@ -68,7 +68,7 @@ export const Button = React.forwardRef((props, ref) => {
 });
 
 Button.defaultProps = {
-	clickAnimation: "default",
+	buttonClickAnimation: "default",
 	variant: "default"
 };
 

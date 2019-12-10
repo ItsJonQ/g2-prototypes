@@ -1,11 +1,11 @@
 import React from "react";
-import { ControlledBlock } from "../components/block";
+import { Block } from "../components/block";
 import { Page } from "../components/page";
 
 export function BlockBase() {
 	return (
 		<Page title="Block Base">
-			<ControlledBlock />
+			<Block />
 		</Page>
 	);
 }

@@ -10,32 +10,10 @@ import {
 	MainToolbar,
 	Group
 } from "./styles";
-import { withControlPanel } from "../control-panel";
 import { Draggable } from "./draggable";
 import { DragHandle } from "./drag-handle";
 import { Expander } from "./expander";
 import { ToolbarItem } from "./toolbar-item";
-
-// CONFIGS
-// Play with these!
-function useAttributes() {
-	const { boolean, color, number, text } = useControls();
-
-	// Debugging
-	boolean("showMouseTrail", false);
-	boolean("alwaysShowMover", true);
-	// Controls
-	boolean("isExpanded", false);
-	// Animations
-	number("animationSpeed", 100);
-	text("animationEasing", "linear");
-	// Interactions
-	number("collapseDebounceTiming", 500);
-	number("hoverAnimationSpeed", 100);
-	// Visuals
-	color("interactionColor", "#3E58E1");
-	number("size", 40);
-}
 
 /**
  * Notes:
@@ -52,6 +30,23 @@ function useAttributes() {
  */
 
 export function Toolbar(props) {
+	const { boolean, color, number, text, attributes } = useControls();
+
+	// Debugging
+	boolean("showMouseTrail", false);
+	boolean("alwaysShowMover", true);
+	// Controls
+	boolean("isExpanded", props.isExpanded || false);
+	// Animations
+	number("animationSpeed", 100);
+	text("animationEasing", "linear");
+	// Interactions
+	number("collapseDebounceTiming", 500);
+	number("hoverAnimationSpeed", 100);
+	// Visuals
+	color("interactionColor", "#3E58E1");
+	number("size", 40);
+
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 	const [isActive, setIsActive] = useState(props.isActive);
 	const [isDragging, setIsDragging] = useState(false);
@@ -62,7 +57,7 @@ export function Toolbar(props) {
 		alwaysShowMover,
 		collapseDebounceTiming,
 		isExpanded: isExpandedProp
-	} = props.attributes;
+	} = attributes;
 
 	const isExpandedRef = useRef(isExpandedProp);
 	const dragHandleRef = useRef(null);
@@ -111,7 +106,7 @@ export function Toolbar(props) {
 	}, collapseDebounceTiming);
 
 	const theme = {
-		...props.attributes
+		...attributes
 	};
 
 	const showDragHandle = alwaysShowMover || isExpanded;
@@ -186,7 +181,5 @@ export function Toolbar(props) {
 		</Draggable>
 	);
 }
-
-export const ControlledToolbar = withControlPanel(useAttributes)(Toolbar);
 
 export default Toolbar;

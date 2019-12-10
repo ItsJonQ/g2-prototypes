@@ -2,18 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { ThemeProvider } from "emotion-theming";
 import { useControls } from "@itsjonq/controls";
 
-import { withControlPanel } from "../control-panel";
-import { ControlledToolbar as Toolbar } from "../toolbar";
+import { Toolbar } from "../toolbar";
 import { BlockWrapper, ToolbarWrapper, ContentWrapper } from "./styles";
 
-function useAttributes() {
-	const { number } = useControls();
+export function Block(props) {
+	const { number, attributes } = useControls();
 	number("blockBorderAnimationSpeed", 0);
 	number("toolbarFadeAnimationSpeed", 220);
 	number("toolbarTopOffset", -40);
-}
 
-export function Block(props) {
 	const ref = useRef(null);
 	const [showToolbar, setShowToolbar] = useState(false);
 	const [isSelected, setIsSelected] = useSelectedState(ref);
@@ -21,7 +18,7 @@ export function Block(props) {
 	const [isDragging, setIsDragging] = useState(false);
 
 	const theme = {
-		...props.attributes
+		...attributes
 	};
 
 	const onDrag = event => {
@@ -106,7 +103,5 @@ function useSelectedState(ref) {
 
 	return [isSelected, setIsSelected];
 }
-
-export const ControlledBlock = withControlPanel(useAttributes)(Block);
 
 export default Block;
