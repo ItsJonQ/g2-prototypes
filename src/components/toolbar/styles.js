@@ -50,8 +50,8 @@ export const ToolbarWrapper = styled.div`
 
 const themeStyles = ({ theme }) => {
 	const { isDarkMode } = theme;
-	let backgroundColor = isDarkMode ? "black" : "white";
-	let textColor = isDarkMode ? "white" : "black";
+	let backgroundColor = isDarkMode ? "#1e1e1e" : "white";
+	let textColor = isDarkMode ? "white" : "#1e1e1e";
 
 	return css`
 		--toolbarBackgroundColor: ${backgroundColor};
