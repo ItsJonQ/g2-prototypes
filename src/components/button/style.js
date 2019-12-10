@@ -147,15 +147,14 @@ const variantDropdown = ({ theme: { color } }) => {
 
 		&:focus,
 		&.is-focused {
-			box-shadow: 0 0 0 1px var(--buttonFocusColor);
 			color: var(--buttonFocusColor);
 		}
 
 		&:active,
 		&.is-active,
 		&.is-pressed {
-			color: ${pressedColor};
-			box-shadow: none;
+			box-shadow: 0 0 0 1px var(--buttonFocusColor);
+			color: var(--buttonFocusColor);
 		}
 
 		&[disabled] {

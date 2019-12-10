@@ -1,7 +1,7 @@
 import React from "react";
 import IconWrapper from "./icon-wrapper";
 
-export function AlighRightIcon(props) {
+export function AlignRightIcon(props) {
 	return (
 		<IconWrapper {...props}>
 			<svg
@@ -21,4 +21,4 @@ export function AlighRightIcon(props) {
 	);
 }
 
-export default AlighRightIcon;
+export default AlignRightIcon;

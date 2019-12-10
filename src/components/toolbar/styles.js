@@ -234,3 +234,18 @@ export const ArrowWrappers = styled(Item)`
 ArrowWrappers.defaultProps = {
 	className: "drag-handle"
 };
+
+export const ToolbarDropdownMenu = styled.div`
+	${themeStyles};
+	background-color: var(--toolbarBackgroundColor);
+	border-radius: 2px;
+	border: 1px solid;
+	border-color: var(--toolbarBorderColor);
+	padding: 4px;
+	outline: none;
+	margin-left: -5px;
+
+	> * + * {
+		margin-top: 8px;
+	}
+`;

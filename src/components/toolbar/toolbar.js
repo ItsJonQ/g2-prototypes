@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useToolbarState } from "reakit/Toolbar";
+import {
+	useToolbarState,
+	ToolbarItem as ReakitToolbarItem
+} from "reakit/Toolbar";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
 import { useControls } from "@itsjonq/controls";
@@ -10,6 +13,7 @@ import {
 	MainToolbar,
 	Group
 } from "./styles";
+import { AlignDropdown } from "./align-dropdown";
 import { Draggable } from "./draggable";
 import { DragHandle } from "./drag-handle";
 import { Expander } from "./expander";
@@ -158,7 +162,10 @@ export function Toolbar(props) {
 							/>
 						</Group>
 						<Group>
-							<ToolbarItem {...toolbar} icon="align-left" />
+							<ReakitToolbarItem
+								as={AlignDropdown}
+								{...toolbar}
+							/>
 						</Group>
 						<Expander isActive={isActive} isExpanded={isExpanded}>
 							<Group>
