@@ -12,7 +12,32 @@ export function Ripple(props) {
 
 	const zoomLevel = attributes.zoomLevel || 1;
 
-	const handleOnClick = event => {
+	const handleOnKeyDown = event => {
+		const { keyCode } = event;
+		if (keyCode === 32) {
+			const targetNode = event.currentTarget;
+			const targetBounds = targetNode.getBoundingClientRect();
+			const { top, left, width, height } = targetBounds;
+
+			const eventProps = {
+				currentTarget: targetNode,
+				pageX: window.scrollX + left + width / 2,
+				pageY: window.scrollY + top + height / 2
+			};
+
+			handleOnMouseDown(eventProps);
+		}
+	};
+
+	const handleOnMouseUp = () => {
+		setIsRippling(false);
+	};
+
+	const handleOnKeyUp = () => {
+		setIsRippling(false);
+	};
+
+	const handleOnMouseDown = event => {
 		const targetNode = event.currentTarget;
 		const targetBounds = targetNode.getBoundingClientRect();
 		const x =
@@ -50,7 +75,10 @@ export function Ripple(props) {
 				position="relative"
 				display="inline-flex"
 				{...props}
-				onMouseDown={handleOnClick}
+				onKeyUp={handleOnKeyUp}
+				onKeyDown={handleOnKeyDown}
+				onMouseDown={handleOnMouseDown}
+				onMouseUp={handleOnMouseUp}
 			/>
 		</RippleContext.Provider>
 	);
