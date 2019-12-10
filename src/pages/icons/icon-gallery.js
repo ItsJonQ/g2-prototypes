@@ -7,9 +7,9 @@ import * as Icons from "../../components/icons";
 import { Text } from "../../components/text";
 
 function useAttributes() {
-	const { range, text } = useControls();
+	const { range, color } = useControls();
 
-	text("iconColor", "black");
+	color("iconColor", "black");
 	range("iconScale", 1, {
 		step: 0.25,
 		min: 0.5,

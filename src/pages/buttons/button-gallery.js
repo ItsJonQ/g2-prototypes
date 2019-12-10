@@ -24,7 +24,6 @@ function useAttributes() {
 		},
 		"cabin"
 	);
-	text("buttonMainColor", "#3e58e1");
 }
 
 function ButtonSample(props) {

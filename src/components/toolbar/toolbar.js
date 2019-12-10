@@ -30,7 +30,7 @@ import { ToolbarItem } from "./toolbar-item";
  */
 
 export function Toolbar(props) {
-	const { boolean, color, number, text, attributes } = useControls();
+	const { boolean, number, text, attributes } = useControls();
 
 	// Debugging
 	boolean("showMouseTrail", false);
@@ -44,7 +44,6 @@ export function Toolbar(props) {
 	number("collapseDebounceTiming", 500);
 	number("hoverAnimationSpeed", 100);
 	// Visuals
-	color("interactionColor", "#3E58E1");
 	number("size", 40);
 
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);

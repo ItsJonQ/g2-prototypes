@@ -114,13 +114,10 @@ const itemPrimaryStyles = props => {
 };
 
 const itemHoverStyles = props => {
-	const { interactionColor, hoverAnimationSpeed } = props.theme;
+	const { hoverAnimationSpeed } = props.theme;
 
 	return css`
 		transition: color ${hoverAnimationSpeed}ms linear;
-		&:hover {
-			color: ${interactionColor};
-		}
 	`;
 };
 

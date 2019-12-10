@@ -1,11 +1,11 @@
 import React from "react";
 import { Page } from "../../components/page";
-import { ControlledIconButtonGallery } from "./icon-button-gallery";
+import { IconButtonGallery } from "./icon-button-gallery";
 
 export function IconButtons() {
 	return (
 		<Page title="IconButtons">
-			<ControlledIconButtonGallery />
+			<IconButtonGallery />
 		</Page>
 	);
 }

@@ -7,8 +7,9 @@ import { Ripple, RippleEffect } from "../ripple";
 import { mainColor, BaseButton, ButtonContent } from "./style";
 
 export const Button = React.forwardRef((props, ref) => {
-	const { select, attributes } = useControls();
+	const { color, select, attributes } = useControls();
 
+	color("buttonMainColor", "#3e58e1");
 	select(
 		"buttonClickAnimation",
 		{
@@ -31,10 +32,10 @@ export const Button = React.forwardRef((props, ref) => {
 		...restProps
 	} = props;
 
-	const { buttonClickAnimation } = attributes;
+	const { buttonMainColor, buttonClickAnimation } = attributes;
 
 	const themeProps = {
-		color: props.color || mainColor,
+		color: props.color || buttonMainColor || mainColor,
 		variant: props.variant
 	};
 
