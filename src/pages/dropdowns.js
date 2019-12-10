@@ -1,7 +1,7 @@
 import React from "react";
 import {
 	useDropdown,
-	DropdownButton,
+	DropdownIconButton,
 	DropdownMenu,
 	DropdownItem,
 	DropdownHeader
@@ -9,18 +9,6 @@ import {
 import { Page } from "../components/page";
 
 export function Dropdowns() {
-	const menu = useDropdown();
-	const items = [
-		{
-			label: "Navigation"
-		},
-		{
-			label: "Cover"
-		},
-		{
-			label: "Paragraph"
-		}
-	];
 	return (
 		<Page title="Dropdowns">
 			<NavigationDropdown />
@@ -32,22 +20,29 @@ function NavigationDropdown() {
 	const menu = useDropdown();
 	const items = [
 		{
-			label: "Navigation"
+			label: "Navigation",
+			icon: "block-nav"
 		},
 		{
-			label: "Cover"
+			label: "Cover",
+			icon: "block-cover"
 		},
 		{
-			label: "Paragraph"
+			label: "Paragraph",
+			icon: "block-paragraph"
+		},
+		{
+			label: "Image",
+			icon: "block-image"
 		}
 	];
 	return (
 		<>
-			<DropdownButton {...menu}>Click</DropdownButton>
-			<DropdownMenu {...menu}>
+			<DropdownIconButton {...menu} icon="directory" />
+			<DropdownMenu {...menu} aria-label="Blocks">
 				<DropdownHeader>Navigation</DropdownHeader>
 				{items.map(item => (
-					<DropdownItem key={item.value} {...item} {...menu}>
+					<DropdownItem key={item.label} {...item} {...menu}>
 						{item.label}
 					</DropdownItem>
 				))}

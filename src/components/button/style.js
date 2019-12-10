@@ -1,7 +1,6 @@
 import colorUtils from "tinycolor2";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
-import { Button as ReakitButton } from "reakit/Button";
 
 export const mainColor = "#3e58e1";
 export const pressedColor = "#000";
@@ -149,6 +148,7 @@ const variantDropdown = ({ theme: { color } }) => {
 		&:focus,
 		&.is-focused {
 			box-shadow: 0 0 0 1px var(--buttonFocusColor);
+			color: var(--buttonFocusColor);
 		}
 
 		&:active,
@@ -275,7 +275,7 @@ function getButtonFocusColor(color) {
 		.toHexString();
 }
 
-export const BaseButton = styled(ReakitButton)`
+export const BaseButton = styled.button`
 	${baseButton};
 	${variant};
 	${alignItems};

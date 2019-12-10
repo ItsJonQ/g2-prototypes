@@ -1,15 +1,14 @@
 import React from "react";
 import { Button } from "../button";
-import {
-	useMenuState,
-	Menu,
-	MenuItem,
-	MenuDisclosure,
-	MenuSeparator
-} from "reakit/Menu";
+import { IconButton } from "../icon-button";
+import { useMenuState, Menu, MenuItem, MenuDisclosure } from "reakit/Menu";
 import { DropdownMenuBase } from "./style";
 
 export { DropdownHeader } from "./style";
+
+export const DropdownIconButton = React.forwardRef((props, ref) => {
+	return <MenuDisclosure as={IconButton} {...props} ref={ref} />;
+});
 
 export const DropdownButton = React.forwardRef((props, ref) => {
 	return <MenuDisclosure as={Button} {...props} ref={ref} />;
