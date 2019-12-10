@@ -28,7 +28,6 @@ export const Button = React.forwardRef((props, ref) => {
 		isActive,
 		isPressed,
 		disabled,
-		onClick,
 		...restProps
 	} = props;
 

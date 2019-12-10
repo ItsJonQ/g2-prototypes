@@ -132,6 +132,39 @@ const variantTertiary = ({ theme: { color } }) => {
 	`;
 };
 
+const variantDropdown = ({ theme: { color } }) => {
+	return css`
+		--buttonTextColor: ${color};
+		--buttonFocusColor: ${getButtonFocusColor(color)};
+
+		border-color: transparent;
+		border-radius: 2px;
+		color: black;
+
+		&:hover,
+		&.is-hovered {
+			color: var(--buttonFocusColor);
+		}
+
+		&:focus,
+		&.is-focused {
+			box-shadow: 0 0 0 1px var(--buttonFocusColor);
+		}
+
+		&:active,
+		&.is-active,
+		&.is-pressed {
+			color: ${pressedColor};
+			box-shadow: none;
+		}
+
+		&[disabled] {
+			color: var(--buttonDisabledColor);
+			border-color: currentColor;
+		}
+	`;
+};
+
 const variant = props => {
 	const { variant } = props;
 	switch (variant) {
@@ -141,9 +174,51 @@ const variant = props => {
 			return variantPrimary(props);
 		case "tertiary":
 			return variantTertiary(props);
+		case "dropdown":
+			return variantDropdown(props);
 		default:
 			return variantDefault(props);
 	}
+};
+
+const alignItems = props => {
+	const { alignItems } = props;
+	switch (alignItems) {
+		case "left":
+			return css`
+				justify-content: flex-start;
+			`;
+		case "right":
+			return css`
+				justify-content: flex-end;
+			`;
+		default:
+			return css`
+				justify-content: center;
+			`;
+	}
+};
+
+const block = props => {
+	const { isBlock } = props;
+
+	if (!isBlock) return "";
+
+	return css`
+		display: flex;
+		width: 100%;
+	`;
+};
+
+const narrow = props => {
+	const { isNarrow } = props;
+
+	if (!isNarrow) return "";
+
+	return css`
+		padding-left: 12px;
+		padding-right: 12px;
+	`;
 };
 
 const size = props => {
@@ -203,6 +278,9 @@ function getButtonFocusColor(color) {
 export const BaseButton = styled(ReakitButton)`
 	${baseButton};
 	${variant};
+	${alignItems};
+	${block};
+	${narrow};
 	${size};
 	${iconButton};
 `;

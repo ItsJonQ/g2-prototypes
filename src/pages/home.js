@@ -46,6 +46,7 @@ export function Home() {
 
 			<Section title="Select a component:">
 				<Link to="/buttons">Buttons</Link>
+				<Link to="/dropdowns">Dropdowns</Link>
 				<Link to="/icons">Icons</Link>
 				<Link to="/icon-buttons">IconButtons</Link>
 			</Section>

@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Home } from "./pages/home";
 import { BlockBase } from "./pages/block-base";
 import { ButtonInteraction } from "./pages/button-interaction";
+import { Dropdowns } from "./pages/dropdowns";
 import { ToolbarBase } from "./pages/toolbar-base";
 import { ToolbarColors } from "./pages/toolbar-colors";
 import { ToolbarMovers } from "./pages/toolbar-movers";
@@ -16,6 +17,7 @@ export function Routes() {
 		<Switch>
 			<Route path="/block-base" component={BlockBase} />
 			<Route path="/button-interaction" component={ButtonInteraction} />
+			<Route path="/dropdowns" component={Dropdowns} />
 			<Route path="/toolbar-base" component={ToolbarBase} />
 			<Route path="/toolbar-colors" component={ToolbarColors} />
 			<Route path="/toolbar-movers" component={ToolbarMovers} />
