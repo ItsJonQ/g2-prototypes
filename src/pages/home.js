@@ -36,6 +36,7 @@ export function Home() {
 			<Section title="Select a prototype:">
 				<Link to="/button-interaction">Button (Interaction)</Link>
 				<Link to="/toolbar-base">Toolbar (Base)</Link>
+				<Link to="/toolbar-colors">Toolbar (Colors)</Link>
 				<Link to="/toolbar-movers">Toolbar (Movers)</Link>
 				<Link to="/toolbar-mobile">Toolbar (Mobile/Phone)</Link>
 				<Link to="/block-base">Block x Toolbar (Base)</Link>

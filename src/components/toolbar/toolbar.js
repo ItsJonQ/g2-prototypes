@@ -36,6 +36,7 @@ export function Toolbar(props) {
 	boolean("showMouseTrail", false);
 	boolean("alwaysShowMover", true);
 	// Controls
+	boolean("isDarkMode", props.isDarkMode || false);
 	boolean("isExpanded", props.isExpanded || false);
 	// Animations
 	number("animationSpeed", 100);

@@ -48,37 +48,49 @@ export const ToolbarWrapper = styled.div`
 	border-radius: 2px;
 `;
 
+const themeStyles = ({ theme }) => {
+	const { isDarkMode } = theme;
+	let backgroundColor = isDarkMode ? "black" : "white";
+	let textColor = isDarkMode ? "white" : "black";
+
+	return css`
+		--toolbarBackgroundColor: ${backgroundColor};
+		--toolbarBorderColor: ${textColor};
+		--toolbarTextColor: ${textColor};
+	`;
+};
+
 export const MainToolbar = styled.div`
+	${themeStyles};
 	${animationStyles};
 	${size};
 	display: flex;
 	border-radius: 2px;
-	border: 1px solid black;
-	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+	border: 1px solid var(--toolbarBorderColor);
 	overflow: hidden;
 	position: relative;
 
 	${({ isActive }) =>
 		isActive &&
-		`
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  `}
+		css`
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		`}
 
 	${({ isAside }) =>
 		isAside &&
-		`
-    border-radius: 2px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  `}
+		css`
+			border-radius: 2px;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		`}
 `;
 
 export const Group = styled.div`
 	${animationStyles};
-	background: white;
+	background: var(--toolbarBackgroundColor);
 	display: inline-flex;
-	border-right: 1px solid black;
+	border-right: 1px solid var(--toolbarBorderColor);
 	height: 100%;
 	vertical-align: middle;
 
@@ -127,12 +139,12 @@ const itemBorderStyles = props => {
 	if (!isWithBorder) return "";
 
 	return css`
-		border-right: 1px solid black !important;
+		border-right: 1px solid var(--toolbarBorderColor) !important;
 	`;
 };
 
 export const Item = styled.div`
-	color: black;
+	color: var(--toolbarTextColor);
 	display: inline-flex;
 	vertical-align: middle;
 	align-items: center;
@@ -154,6 +166,10 @@ export const Item = styled.div`
 	${itemHoverStyles};
 	${itemBorderStyles}
 
+	button {
+		color: currentColor;
+	}
+
 	> * {
 		fill: currentColor;
 		${animationStyles};
@@ -173,9 +189,9 @@ export const DragHandlerSliderWrapper = styled.div`
 
 	${({ innerWidth, isActive }) =>
 		isActive &&
-		`
-		transform: translateX(-${innerWidth - 2}px);
-	`}
+		css`
+			transform: translateX(-${innerWidth - 2}px);
+		`}
 `;
 
 export const DragSlider = styled.div``;
@@ -188,7 +204,7 @@ export const Slider = styled.div`
 
 export const ArrowWrappers = styled(Item)`
 	${animationStyles};
-	background: white;
+	background: var(--toolbarBackgroundColor);
 	position: relative;
 	padding: 4px 10px;
 
@@ -202,16 +218,16 @@ export const ArrowWrappers = styled(Item)`
 		isDragging &&
 		css`
 			cursor: grabbing !important;
-			background: black;
-			color: white;
+			background: var(--toolbarTextColor);
+			color: var(--toolbarBackgroundColor);
 
 			&:focus {
-				background: black;
-				color: white;
+				background: var(--toolbarTextColor);
+				color: var(--toolbarBackgroundColor);
 			}
 
 			* {
-				color: white;
+				color: var(--toolbarBackgroundColor);
 			}
 		`}
 `;
