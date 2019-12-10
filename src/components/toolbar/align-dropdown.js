@@ -3,11 +3,9 @@ import {
 	useDropdown,
 	DropdownIconButton,
 	DropdownIconItem,
-	DropdownMenu,
-	DropdownItem
+	DropdownMenu
 } from "../dropdown";
-import { useMenuState, MenuDisclosure, Menu, MenuItem } from "reakit/Menu";
-import { BaseToolbarItem, ToolbarDropdownMenu, Item } from "./styles";
+import { ToolbarDropdownMenu, Item } from "./styles";
 
 export const AlignDropdown = React.forwardRef((props, ref) => {
 	const menu = useDropdown();
