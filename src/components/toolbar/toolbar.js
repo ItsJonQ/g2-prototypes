@@ -3,6 +3,7 @@ import {
 	useToolbarState,
 	ToolbarItem as ReakitToolbarItem
 } from "reakit/Toolbar";
+import { is } from "@itsjonq/is";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
 import { useControls } from "@itsjonq/controls";
@@ -37,10 +38,14 @@ import { ToolbarBlockItem } from "./toolbar-block-item";
 export function Toolbar(props) {
 	const { boolean, number, select, text, attributes } = useControls();
 
+	const intialAlwaysShowMover = is.defined(props.alwaysShowMover)
+		? props.alwaysShowMover
+		: true;
+
 	// Debugging
 	boolean("showMouseTrail", false);
 	// Movers
-	boolean("alwaysShowMover", props.alwaysShowMover || true);
+	boolean("alwaysShowMover", intialAlwaysShowMover);
 	// Controls
 	boolean("isDarkMode", props.isDarkMode || false);
 	boolean("isExpanded", props.isExpanded || false);
@@ -129,7 +134,7 @@ export function Toolbar(props) {
 	};
 
 	const showDragHandle =
-		props.alwaysShowMover || alwaysShowMover || isExpanded;
+		intialAlwaysShowMover || alwaysShowMover || isExpanded;
 
 	const renderDragHandleProps = {
 		isActive: showDragHandle,
