@@ -37,7 +37,7 @@ export const AlignDropdown = React.forwardRef((props, ref) => {
 				aria-label="alignment"
 			>
 				{items.map(item => (
-					<DropdownIconItem key={item.label} {...item} {...menu}>
+					<DropdownIconItem key={item.icon} {...item} {...menu}>
 						{item.label}
 					</DropdownIconItem>
 				))}

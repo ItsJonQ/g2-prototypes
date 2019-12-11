@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Toolbar } from "../components/toolbar";
-import {
-	DragHandleWrapper,
-	BaseToolbarArrowItem
-} from "../components/toolbar/drag-handle";
-import { DragHandleDualArrow } from "../components/toolbar/drag-handle-dual-arrow";
-import { Icon } from "../components/icon";
 import { Page } from "../components/page";
 import { Text } from "../components/text";
 import { View } from "../components/view";
@@ -14,49 +8,79 @@ import { View } from "../components/view";
 export function ToolbarMovers() {
 	return (
 		<Page title="Toolbar Movers">
-			<Text shade="muted">Hover and move the Toolbar around</Text>
-			<View mt={4}>
-				<Toolbar default={{ x: 100, y: 0 }} />
+			<Section title="Option 1. Contextual">
+				<Toolbar disableDragging alwaysShowMover={false} />
+			</Section>
 
+			<Section title="Option 1. Contextual (Horizontal)">
 				<Toolbar
-					default={{ x: 100, y: 100 }}
-					renderDragHandle={CombinedArrowDragHandle}
+					disableDragging
+					alwaysShowMover={false}
+					isMoverHorizontal
 				/>
+			</Section>
 
+			<Divider />
+
+			<Section title="Option 2. Visible by default">
+				<Toolbar disableDragging alwaysShowMover={true} />
+			</Section>
+
+			<Section title="Option 2. Visible by default (Horizontal)">
 				<Toolbar
-					default={{ x: 100, y: 200 }}
-					renderDragHandle={DragHandleDualArrow}
-					dragHandleClassName="drag-arrow"
+					disableDragging
+					alwaysShowMover={true}
+					isMoverHorizontal
 				/>
-			</View>
+			</Section>
+
+			<Divider />
+
+			<Section title="Option 3. Right Side">
+				<Toolbar
+					disableDragging
+					alwaysShowMover={true}
+					isMoverRightSide
+					isExpanded
+				/>
+			</Section>
+
+			<Section title="Option 3. Right Side (Horizontal)">
+				<Toolbar
+					disableDragging
+					alwaysShowMover={true}
+					isMoverRightSide
+					isExpanded
+					isMoverHorizontal
+				/>
+			</Section>
+
+			<Divider />
 		</Page>
 	);
 }
 
-function CombinedArrowDragHandle(props) {
-	const { isDragging } = props;
+function Section({ children, title }) {
 	return (
-		<DragHandleWrapper {...props}>
-			<BaseToolbarArrowItem {...props}>
-				<CombinedArrowIconWrapper>
-					{isDragging ? (
-						<Icon icon="mover-dragged" />
-					) : (
-						<>
-							<Icon icon="chevron-up" />
-							<Icon icon="chevron-down" />
-						</>
-					)}
-				</CombinedArrowIconWrapper>
-			</BaseToolbarArrowItem>
-		</DragHandleWrapper>
+		<View mb={5}>
+			<View mb={3}>
+				<Text shade="muted">{title}</Text>
+			</View>
+			<Wrapper>{children}</Wrapper>
+		</View>
 	);
 }
-const CombinedArrowIconWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 48px;
+
+function Divider() {
+	return (
+		<View my={5}>
+			<hr />
+		</View>
+	);
+}
+
+const Wrapper = styled.div`
+	display: inline-flex;
 `;
 
 export default ToolbarMovers;

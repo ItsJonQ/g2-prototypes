@@ -164,6 +164,60 @@ const variantDropdown = ({ theme: { color } }) => {
 	`;
 };
 
+const variantToolbarBlock = ({ theme: { color } }) => {
+	return css`
+		--buttonTextColor: ${color};
+		--buttonFocusColor: ${getButtonFocusColor(color)};
+
+		border-color: transparent;
+		border-radius: 0px;
+		color: inherit;
+		margin: -1px;
+		min-height: calc(100% + 2px);
+		min-width: 32px;
+		padding: 2px 8px;
+		position: relative;
+		width: calc(100% + 2px);
+		z-index: 1;
+
+		&:hover,
+		&.is-hovered {
+			color: var(--buttonFocusColor);
+		}
+
+		&:focus,
+		&.is-focused {
+			color: var(--buttonFocusColor);
+			box-shadow: 0 0 0 2px var(--buttonFocusColor) inset;
+		}
+
+		&:active,
+		&.is-active,
+		&.is-pressed {
+			box-shadow: 0 0 0 1px var(--buttonFocusColor);
+			color: var(--buttonFocusColor);
+		}
+
+		&[disabled] {
+			color: var(--buttonDisabledColor);
+			border-color: currentColor;
+		}
+
+		&::before {
+			width: 0;
+			height: 0;
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+			border-bottom: 6px solid currentColor;
+			position: absolute;
+			content: "";
+			bottom: -2px;
+			right: -3px;
+			transform: rotate(135deg);
+		}
+	`;
+};
+
 const variant = props => {
 	const { variant } = props;
 	switch (variant) {
@@ -175,6 +229,8 @@ const variant = props => {
 			return variantTertiary(props);
 		case "dropdown":
 			return variantDropdown(props);
+		case "toolbar-block":
+			return variantToolbarBlock(props);
 		default:
 			return variantDefault(props);
 	}
@@ -215,8 +271,8 @@ const narrow = props => {
 	if (!isNarrow) return "";
 
 	return css`
-		padding-left: 12px;
-		padding-right: 12px;
+		padding-left: 4px;
+		padding-right: 4px;
 	`;
 };
 
@@ -268,7 +324,7 @@ const iconButton = props => {
 		&.is-pressed {
 			background-color: var(--buttonPressedColor);
 			box-shadow: 0 0 0 1px var(--buttonPressedColor);
-			color: white;
+			color: white !important;
 		}
 	`;
 };
@@ -283,11 +339,11 @@ const styleProps = ({ overflow }) => css({ overflow });
 
 export const BaseButton = styled.button`
 	${baseButton};
+	${iconButton};
 	${variant};
 	${alignItems};
 	${block};
 	${narrow};
-	${iconButton};
 	${size};
 	${styleProps};
 `;

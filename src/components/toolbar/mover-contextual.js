@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { ToolbarItem } from "reakit/Toolbar";
+import { useSpring, animated } from "react-spring";
+
 import { Icon } from "../icon";
 import { IconButton } from "../icon-button";
 
@@ -18,7 +20,14 @@ export function MoverWrapper(props) {
 }
 
 export function MoverContextual(props) {
-	const { isDragging, toolbar } = props;
+	const { isDragging, isHorizontal, toolbar } = props;
+
+	const animatedStyles = useSpring({
+		config: {
+			duration: 50
+		},
+		transform: isHorizontal ? "rotate(-90deg)" : "rotate(0deg)"
+	});
 
 	return (
 		<MoverWrapper {...props}>
@@ -26,38 +35,44 @@ export function MoverContextual(props) {
 				{isDragging ? (
 					<Icon icon="mover-dragged" />
 				) : (
-					<>
-						<ToolbarItemContainer>
-							<ToolbarItem
-								{...toolbar}
-								icon="chevron-up"
-								iconSize={20}
-								size="micro"
-								overflow="hidden"
-								as={IconButton}
-							/>
-							<ToolbarItem
-								{...toolbar}
-								as={IconButton}
-								icon="chevron-down"
-								iconSize={20}
-								iconStyles={{
-									left: 1
-								}}
-								size="micro"
-							/>
-						</ToolbarItemContainer>
-					</>
+					<animated.div style={animatedStyles}>
+						<Wrapper>
+							<ToolbarItemContainer>
+								<ToolbarItem
+									{...toolbar}
+									icon="chevron-up"
+									iconSize={20}
+									size="micro"
+									overflow="hidden"
+									as={IconButton}
+								/>
+								<ToolbarItem
+									{...toolbar}
+									as={IconButton}
+									icon="chevron-down"
+									iconSize={20}
+									iconStyles={{
+										left: 1
+									}}
+									size="micro"
+								/>
+							</ToolbarItemContainer>
+						</Wrapper>
+					</animated.div>
 				)}
 			</ArrowWrappers>
 		</MoverWrapper>
 	);
 }
 
+const Wrapper = styled.div`
+	padding-right: 1px;
+	margin: 0 -4px;
+`;
+
 export const ToolbarItemContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin: 0 -4px;
 `;
 
 export const IconPlaceholder = styled.div`

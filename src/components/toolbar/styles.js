@@ -57,6 +57,7 @@ const themeStyles = ({ theme }) => {
 		--toolbarBackgroundColor: ${backgroundColor};
 		--toolbarBorderColor: ${textColor};
 		--toolbarTextColor: ${textColor};
+		--toolbarIconColor: ${textColor};
 	`;
 };
 
@@ -91,6 +92,7 @@ export const MainToolbar = styled.div`
 export const Group = styled.div`
 	${animationStyles};
 	background: var(--toolbarBackgroundColor);
+	color: var(--toolbarTextColor);
 	display: inline-flex;
 	border-right: 1px solid var(--toolbarBorderColor);
 	height: 100%;
@@ -105,26 +107,6 @@ export const Group = styled.div`
 `;
 Group.defaultProps = {
 	className: "ToolbarGroup"
-};
-
-const itemPrimaryStyles = props => {
-	const { isPrimaryAction } = props;
-	if (!isPrimaryAction) return "";
-
-	return css`
-		&::before {
-			width: 0;
-			height: 0;
-			border-left: 6px solid transparent;
-			border-right: 6px solid transparent;
-			border-bottom: 6px solid currentColor;
-			position: absolute;
-			content: "";
-			bottom: -2px;
-			right: -4px;
-			transform: rotate(135deg);
-		}
-	`;
 };
 
 const itemHoverStyles = props => {
@@ -164,7 +146,6 @@ export const Item = styled.div`
 		background: rgba(0, 0, 0, 0.1);
 	}
 
-	${itemPrimaryStyles};
 	${itemHoverStyles};
 	${itemBorderStyles}
 
@@ -187,13 +168,22 @@ export const DragHandlerSliderWrapper = styled.div`
 	vertical-align: top;
 	position: absolute;
 	top: 0;
-	left: 0;
 
-	${({ innerWidth, isActive }) =>
-		isActive &&
-		css`
-			transform: translateX(-${innerWidth - 2}px);
-		`}
+	${({ innerWidth, isRight, isActive }) => {
+		if (!isActive) return "";
+
+		if (isRight) {
+			return css`
+				right: 0;
+				transform: translateX(${innerWidth - 2}px);
+			`;
+		} else {
+			return css`
+				left: 0;
+				transform: translateX(-${innerWidth - 2}px);
+			`;
+		}
+	}}
 `;
 
 export const DragSlider = styled.div``;
