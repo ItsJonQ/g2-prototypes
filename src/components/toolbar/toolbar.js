@@ -134,7 +134,7 @@ export function Toolbar(props) {
 	};
 
 	const showDragHandle =
-		intialAlwaysShowMover || alwaysShowMover || isExpanded;
+		props.alwaysShowMover || alwaysShowMover || isExpanded;
 
 	const renderDragHandleProps = {
 		isActive: showDragHandle,
