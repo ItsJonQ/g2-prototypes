@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DragHandleWrapper, BaseToolbarArrowItem } from "./drag-handle";
 import { Icon } from "../icon";
 
-export function DualArrowDragHandle(props) {
+export function DragHandleDualArrow(props) {
 	const { isDragging } = props;
 	const [isPressedLeft, setIsPressedLeft] = useState(false);
 	const isPressedRight = !isPressedLeft;

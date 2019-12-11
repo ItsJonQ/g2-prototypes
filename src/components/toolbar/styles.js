@@ -70,6 +70,8 @@ export const MainToolbar = styled.div`
 	overflow: hidden;
 	position: relative;
 
+	${({ zIndex }) => css({ zIndex })};
+
 	${({ isActive }) =>
 		isActive &&
 		css`

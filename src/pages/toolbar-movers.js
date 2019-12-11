@@ -5,7 +5,7 @@ import {
 	DragHandleWrapper,
 	BaseToolbarArrowItem
 } from "../components/toolbar/drag-handle";
-import { DualArrowDragHandle } from "../components/toolbar/dual-arrow-drag-handle";
+import { DragHandleDualArrow } from "../components/toolbar/drag-handle-dual-arrow";
 import { Icon } from "../components/icon";
 import { Page } from "../components/page";
 import { Text } from "../components/text";
@@ -25,7 +25,7 @@ export function ToolbarMovers() {
 
 				<Toolbar
 					default={{ x: 100, y: 200 }}
-					renderDragHandle={DualArrowDragHandle}
+					renderDragHandle={DragHandleDualArrow}
 					dragHandleClassName="drag-arrow"
 				/>
 			</View>

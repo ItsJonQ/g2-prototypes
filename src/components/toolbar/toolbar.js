@@ -15,8 +15,8 @@ import {
 } from "./styles";
 import { AlignDropdown } from "./align-dropdown";
 import { Draggable } from "./draggable";
-import { DragHandle } from "./drag-handle";
 import { Expander } from "./expander";
+import { Mover } from "./mover";
 import { ToolbarItem } from "./toolbar-item";
 
 /**
@@ -34,7 +34,7 @@ import { ToolbarItem } from "./toolbar-item";
  */
 
 export function Toolbar(props) {
-	const { boolean, number, text, attributes } = useControls();
+	const { boolean, number, select, text, attributes } = useControls();
 
 	// Debugging
 	boolean("showMouseTrail", false);
@@ -42,6 +42,14 @@ export function Toolbar(props) {
 	// Controls
 	boolean("isDarkMode", props.isDarkMode || false);
 	boolean("isExpanded", props.isExpanded || false);
+	// Movers
+	select(
+		"moverType",
+		{
+			Contextual: "contextual"
+		},
+		"contextual"
+	);
 	// Animations
 	number("animationSpeed", 100);
 	text("animationEasing", "linear");
@@ -60,7 +68,8 @@ export function Toolbar(props) {
 	const {
 		alwaysShowMover,
 		collapseDebounceTiming,
-		isExpanded: isExpandedProp
+		isExpanded: isExpandedProp,
+		moverType
 	} = attributes;
 
 	const isExpandedRef = useRef(isExpandedProp);
@@ -147,12 +156,17 @@ export function Toolbar(props) {
 						{renderDragHandle ? (
 							renderDragHandle(renderDragHandleProps)
 						) : (
-							<DragHandle {...renderDragHandleProps} />
+							<Mover
+								toolbar={toolbar}
+								{...renderDragHandleProps}
+								type={moverType}
+							/>
 						)}
 					</DragHandlerSliderWrapper>
 					<MainToolbar
 						isActive={showDragHandle || isActive}
 						isExpanded={isExpanded}
+						zIndex={1}
 					>
 						<Group>
 							<ToolbarItem

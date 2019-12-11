@@ -10,14 +10,17 @@ const size = ({ size = 24 }) => {
 	});
 };
 
-const display = ({ display = "inline-block" }) => {
+const styleProps = ({ display, position, top, left }) => {
 	return css({
-		display
+		display: display || "inline-block",
+		position,
+		top,
+		left
 	});
 };
 
 export const IconWrapper = styled.div`
-	${display};
+	${styleProps};
 	${size};
 
 	svg {

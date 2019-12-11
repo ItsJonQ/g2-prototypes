@@ -4,7 +4,7 @@ import { useControls } from "@itsjonq/controls";
 
 import { withControlPanel } from "../components/control-panel";
 import { Toolbar } from "../components/toolbar";
-import { DualArrowDragHandle } from "../components/toolbar/dual-arrow-drag-handle";
+import { DragHandleDualArrow } from "../components/toolbar/drag-handle-dual-arrow";
 import { Phone } from "../components/phone";
 import { Page } from "../components/page";
 
@@ -51,7 +51,7 @@ export function BaseToolbarMobile(props) {
 									disableDragging={true}
 									isExpanded
 									style={{ marginLeft: 89 }}
-									renderDragHandle={DualArrowDragHandle}
+									renderDragHandle={DragHandleDualArrow}
 								/>
 							</ToolbarWrapper>
 							<Keyboard />

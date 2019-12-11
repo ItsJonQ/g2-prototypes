@@ -3,11 +3,24 @@ import Button from "../button";
 import Icon from "../icon";
 
 export const IconButton = React.forwardRef((props, ref) => {
-	const { icon, ...restProps } = props;
+	const { icon, iconSize, iconStyles = {}, size, ...restProps } = props;
+
+	let iconProps = {
+		...iconStyles,
+		display: "block"
+	};
+
+	if (size === "micro") {
+		iconProps = {
+			...iconProps,
+			position: "relative",
+			top: -6
+		};
+	}
 
 	return (
-		<Button {...restProps} isIconButton ref={ref}>
-			<Icon icon={icon} display="block" />
+		<Button {...restProps} size={size} isIconButton ref={ref}>
+			<Icon icon={icon} iconSize={iconSize} {...iconProps} />
 		</Button>
 	);
 });

@@ -227,8 +227,13 @@ const size = props => {
 		case "sm":
 			return css`
 				font-size: 11px;
-				padding: 4px 24px 4px;
 				height: 24px;
+				padding: 4px 24px 4px;
+			`;
+		case "micro":
+			return css`
+				height: 16px;
+				padding: 2px 4px;
 			`;
 		default:
 			return "";
@@ -274,14 +279,17 @@ function getButtonFocusColor(color) {
 		.toHexString();
 }
 
+const styleProps = ({ overflow }) => css({ overflow });
+
 export const BaseButton = styled.button`
 	${baseButton};
 	${variant};
 	${alignItems};
 	${block};
 	${narrow};
-	${size};
 	${iconButton};
+	${size};
+	${styleProps};
 `;
 
 export const ButtonContent = styled.span`
