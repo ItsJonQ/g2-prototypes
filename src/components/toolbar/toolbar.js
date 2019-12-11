@@ -21,53 +21,7 @@ import { Mover } from "./mover";
 import { ToolbarItem } from "./toolbar-item";
 import { ToolbarBlockItem } from "./toolbar-block-item";
 
-/**
- * Notes:
- * ToolbarContent
- * Width needs to be dynamically calculated before transitioning
- *
- * DragHandle
- * Exists as a separate under layer.
- * Positioned absolutely and hidden.
- * Slide into view by transform.
- * Does not affect layout of container.
- * Therefore... cannot be considered for styles like
- * borderRadius or boxShadow.
- */
-
-export function Toolbar(props) {
-	const { boolean, number, select, text, attributes } = useControls();
-
-	const intialAlwaysShowMover = is.defined(props.alwaysShowMover)
-		? props.alwaysShowMover
-		: true;
-
-	// Debugging
-	boolean("showMouseTrail", false);
-	// Movers
-	boolean("alwaysShowMover", intialAlwaysShowMover);
-	// Controls
-	boolean("isDarkMode", props.isDarkMode || false);
-	boolean("isExpanded", props.isExpanded || false);
-	// Movers
-	select(
-		"moverType",
-		{
-			Contextual: "contextual"
-		},
-		"contextual"
-	);
-	boolean("isMoverHorizontal", props.isMoverHorizontal || false);
-	boolean("isMoverRightSide", props.isMoverRightSide || false);
-	// Animations
-	number("animationSpeed", 100);
-	text("animationEasing", "linear");
-	// Interactions
-	number("collapseDebounceTiming", 500);
-	number("hoverAnimationSpeed", 100);
-	// Visuals
-	number("size", 40);
-
+export function ToolbarComponent(props) {
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 	const [isActive, setIsActive] = useState(props.isActive);
 	const [isDragging, setIsDragging] = useState(false);
@@ -75,18 +29,24 @@ export function Toolbar(props) {
 	const toolbar = useToolbarState();
 
 	const {
+		attributes,
+		onDragStart,
+		onDragStop,
+		moverType,
+		renderDragHandle,
+		...restProps
+	} = props;
+
+	const {
 		alwaysShowMover,
 		collapseDebounceTiming,
 		isExpanded: isExpandedProp,
 		isMoverHorizontal,
-		isMoverRightSide,
-		moverType
+		isMoverRightSide
 	} = attributes;
 
 	const isExpandedRef = useRef(isExpandedProp);
 	const dragHandleRef = useRef(null);
-
-	const { onDragStart, onDragStop, renderDragHandle, ...restProps } = props;
 
 	useEffect(() => {
 		if (dragHandleRef.current) {
@@ -214,6 +174,34 @@ export function Toolbar(props) {
 			</ThemeProvider>
 		</Draggable>
 	);
+}
+
+export function Toolbar(props) {
+	const { boolean, number, text, attributes } = useControls();
+
+	const intialAlwaysShowMover = is.defined(props.alwaysShowMover)
+		? props.alwaysShowMover
+		: true;
+
+	// Debugging
+	boolean("showMouseTrail", false);
+	// Movers
+	boolean("alwaysShowMover", intialAlwaysShowMover);
+	// Controls
+	boolean("isDarkMode", props.isDarkMode || false);
+	boolean("isExpanded", props.isExpanded || false);
+	boolean("isMoverHorizontal", props.isMoverHorizontal || false);
+	boolean("isMoverRightSide", props.isMoverRightSide || false);
+	// Animations
+	number("animationSpeed", 100);
+	text("animationEasing", "linear");
+	// Interactions
+	number("collapseDebounceTiming", 500);
+	number("hoverAnimationSpeed", 100);
+	// Visuals
+	number("size", 40);
+
+	return <ToolbarComponent {...props} attributes={attributes} />;
 }
 
 export default Toolbar;

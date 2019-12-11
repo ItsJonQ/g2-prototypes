@@ -17,6 +17,7 @@ export * from "./chevron-right";
 export * from "./chevron-up";
 export * from "./close";
 export * from "./color";
+export * from "./drag";
 export * from "./directory";
 export * from "./done";
 export * from "./edit";

@@ -164,7 +164,7 @@ const variantDropdown = ({ theme: { color } }) => {
 	`;
 };
 
-const variantToolbarBlock = ({ theme: { color } }) => {
+const variantToolbarBlock = ({ theme: { color }, hasFlag }) => {
 	return css`
 		--buttonTextColor: ${color};
 		--buttonFocusColor: ${getButtonFocusColor(color)};
@@ -203,18 +203,21 @@ const variantToolbarBlock = ({ theme: { color } }) => {
 			border-color: currentColor;
 		}
 
-		&::before {
-			width: 0;
-			height: 0;
-			border-left: 6px solid transparent;
-			border-right: 6px solid transparent;
-			border-bottom: 6px solid currentColor;
-			position: absolute;
-			content: "";
-			bottom: -2px;
-			right: -3px;
-			transform: rotate(135deg);
-		}
+		${hasFlag &&
+			css`
+				&::before {
+					width: 0;
+					height: 0;
+					border-left: 6px solid transparent;
+					border-right: 6px solid transparent;
+					border-bottom: 6px solid currentColor;
+					position: absolute;
+					content: "";
+					bottom: -2px;
+					right: -3px;
+					transform: rotate(135deg);
+				}
+			`}
 	`;
 };
 

@@ -74,9 +74,3 @@ export const ToolbarItemContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
-
-export const IconPlaceholder = styled.div`
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
-`;

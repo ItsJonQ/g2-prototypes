@@ -7,6 +7,7 @@ export const ToolbarBlockItem = React.forwardRef((props, ref) => {
 		<ReakitToolbarItem
 			{...props}
 			as={IconButton}
+			hasFlag
 			icon="block-paragraph"
 			variant="toolbar-block"
 		/>

@@ -56,6 +56,25 @@ export function ToolbarMovers() {
 			</Section>
 
 			<Divider />
+
+			<Section title="Option 4. Drag">
+				<Toolbar
+					alwaysShowMover={true}
+					isExpanded
+					moverType="draggable"
+				/>
+			</Section>
+
+			<Section title="Option 4. Horizontal">
+				<Toolbar
+					disableDragging
+					alwaysShowMover={true}
+					isExpanded
+					isMoverHorizontal
+				/>
+			</Section>
+
+			<View p={6} />
 		</Page>
 	);
 }
