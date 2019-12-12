@@ -3,7 +3,7 @@ import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 
 export const mainColor = "#3e58e1";
-export const pressedColor = "#000";
+export const pressedColor = "#1e1e1e";
 export const disabledColor = "#ccc";
 
 export const baseButtonStyles = {
@@ -138,7 +138,7 @@ const variantDropdown = ({ theme: { color } }) => {
 
 		border-color: transparent;
 		border-radius: 2px;
-		color: black;
+		color: #1e1e1e;
 
 		&:hover,
 		&.is-hovered {
@@ -311,7 +311,7 @@ const iconButton = props => {
 		--buttonFocusColor: ${getButtonFocusColor(color)};
 		border: none;
 		border-radius: 2px;
-		color: black;
+		color: #1e1e1e;
 		width: 32px;
 		height: 100%;
 		max-height: 32px;

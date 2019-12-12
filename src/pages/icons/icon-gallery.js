@@ -9,7 +9,7 @@ import { Text } from "../../components/text";
 function useAttributes() {
 	const { range, color } = useControls();
 
-	color("iconColor", "black");
+	color("iconColor", "#1e1e1e");
 	range("iconScale", 1, {
 		step: 0.25,
 		min: 0.5,

@@ -19,7 +19,7 @@ export const RippleWave = styled.span`
 	transform: translate(-50%, -50%);
 	pointer-events: none;
 	transition: all 300ms ease 0s;
-	background-color: black;
+	background-color: #1e1e1e;
 	pointer-events: none;
 	will-change: transform, opacity;
 `;

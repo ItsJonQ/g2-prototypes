@@ -37,7 +37,7 @@ const Logo = styled.h1`
 		text-decoration: none;
 		padding: 8px 0;
 		display: block;
-		color: black;
+		color: #1e1e1e;
 	}
 `;
 
