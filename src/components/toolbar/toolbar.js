@@ -7,7 +7,6 @@ import { is } from "@itsjonq/is";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
 import { useControls } from "@itsjonq/controls";
-import { View } from "@itsjonq/elm";
 
 import {
 	DragHandlerSliderWrapper,
@@ -24,11 +23,15 @@ import { ToolbarBlockItem } from "./toolbar-block-item";
 
 export function ToolbarComponent(props) {
 	const [position, setPosition] = useState({ x: 0, y: 0 });
+	const [wrapperPosition, setWrapperPosition] = useState({ x: 0, y: 0 });
+	const [dragDelta, setDragDelta] = useState(0);
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 	const [isActive, setIsActive] = useState(props.isActive);
 	const [isDragging, setIsDragging] = useState(false);
+	const [isMoverDragging, setIsMoverDragging] = useState(false);
 	const [dragHandleWidth, setDragHandleWidth] = useState(0);
 	const toolbar = useToolbarState();
+	const wrapperRef = useRef(null);
 
 	const {
 		attributes,
@@ -63,6 +66,42 @@ export function ToolbarComponent(props) {
 			isExpandedRef.current = isExpandedProp;
 		}
 	}, [isExpandedProp, isExpandedRef, setIsExpanded]);
+
+	useEffect(() => {
+		const handleOnMove = event => {
+			const { movementX, movementY } = event;
+
+			setWrapperPosition({
+				x: wrapperPosition.x + movementX * 1,
+				y: wrapperPosition.y + movementY * 1
+			});
+		};
+
+		const handleMoveEnd = () => {
+			if (isDragging) {
+				setIsDragging(false);
+				setIsMoverDragging(false);
+			}
+		};
+
+		if (isDragging) {
+			document.addEventListener("mousemove", handleOnMove);
+			document.addEventListener("mouseup", handleMoveEnd);
+		}
+
+		return () => {
+			if (isDragging) {
+				document.removeEventListener("mousemove", handleOnMove);
+				document.removeEventListener("mouseup", handleMoveEnd);
+			}
+		};
+	}, [
+		isDragging,
+		wrapperPosition,
+		setWrapperPosition,
+		setIsMoverDragging,
+		setIsDragging
+	]);
 
 	const handleOnDragStart = props => {
 		setIsDragging(true);
@@ -118,6 +157,26 @@ export function ToolbarComponent(props) {
 		setPosition({ x: position.x + moveAmount, y: position.y });
 	};
 
+	const onMoverMouseMove = event => {
+		const { movementX, movementY } = event;
+		const DRAG_THRESHOLD = 15;
+		const nextDelta = Math.max(movementX, movementY);
+		setDragDelta(dragDelta + nextDelta);
+
+		if (dragDelta >= DRAG_THRESHOLD && isMoverDragging) {
+			setIsDragging(true);
+		}
+	};
+
+	const onMoverMouseUp = event => {
+		setIsDragging(false);
+		setIsMoverDragging(false);
+	};
+
+	const onMoverMouseDown = event => {
+		setIsMoverDragging(true);
+	};
+
 	const renderDragHandleProps = {
 		isActive: showDragHandle,
 		isDragging,
@@ -128,6 +187,10 @@ export function ToolbarComponent(props) {
 		onMoveLeft,
 		onMoveRight,
 		...toolbar
+	};
+
+	const wrapperStyle = {
+		transform: `translate(${wrapperPosition.x}px, ${wrapperPosition.y}px)`
 	};
 
 	const positionStyle = {
@@ -143,73 +206,81 @@ export function ToolbarComponent(props) {
 			onDragStart={handleOnDragStart}
 			onDragStop={handleOnDragStop}
 		>
-			<View {...positionStyle}>
-				<ThemeProvider theme={theme}>
-					<BaseToolbar
-						{...restProps}
-						{...toolbar}
-						aria-label="G2 Toolbar"
-						onMouseMove={handleOnMouseMove}
-						onMouseLeave={collapse}
-						className="editor-toolbar"
-					>
-						<DragHandlerSliderWrapper
-							ref={dragHandleRef}
-							isActive={showDragHandle}
-							innerWidth={dragHandleWidth}
-							className="drag-handler-slider-wrapper"
-							isRight={isRightSide}
+			<div style={wrapperStyle}>
+				<div style={positionStyle} ref={wrapperRef}>
+					<ThemeProvider theme={theme}>
+						<BaseToolbar
+							{...restProps}
+							{...toolbar}
+							aria-label="G2 Toolbar"
+							onMouseMove={handleOnMouseMove}
+							onMouseLeave={collapse}
+							className="editor-toolbar"
 						>
-							{renderDragHandle ? (
-								renderDragHandle(renderDragHandleProps)
-							) : (
-								<Mover
-									toolbar={toolbar}
-									{...renderDragHandleProps}
-									type={moverType}
-									isHorizontal={isHorizontal}
-								/>
-							)}
-						</DragHandlerSliderWrapper>
-						<MainToolbar
-							isActive={showDragHandle || isActive}
-							isExpanded={isExpanded}
-							zIndex={1}
-						>
-							<Group>
-								<ToolbarBlockItem {...toolbar} />
-							</Group>
-							<Group>
-								<ReakitToolbarItem
-									{...toolbar}
-									as={AlignDropdown}
-								/>
-							</Group>
-							<Expander
-								isActive={isActive}
+							<DragHandlerSliderWrapper
+								ref={dragHandleRef}
+								isActive={showDragHandle}
+								innerWidth={dragHandleWidth}
+								className="drag-handler-slider-wrapper"
+								isRight={isRightSide}
+							>
+								{renderDragHandle ? (
+									renderDragHandle(renderDragHandleProps)
+								) : (
+									<Mover
+										toolbar={toolbar}
+										{...renderDragHandleProps}
+										type={moverType}
+										isHorizontal={isHorizontal}
+										onMouseUp={onMoverMouseUp}
+										onMouseDown={onMoverMouseDown}
+										onMouseMove={onMoverMouseMove}
+									/>
+								)}
+							</DragHandlerSliderWrapper>
+							<MainToolbar
+								isActive={showDragHandle || isActive}
 								isExpanded={isExpanded}
+								zIndex={1}
 							>
 								<Group>
-									<ToolbarItem
+									<ToolbarBlockItem {...toolbar} />
+								</Group>
+								<Group>
+									<ReakitToolbarItem
 										{...toolbar}
-										onFocus={expand}
-										icon="bold"
-									/>
-									<ToolbarItem {...toolbar} icon="italic" />
-									<ToolbarItem {...toolbar} icon="link" />
-									<ToolbarItem
-										{...toolbar}
-										icon="chevron-down"
+										as={AlignDropdown}
 									/>
 								</Group>
-							</Expander>
-							<Group isLast>
-								<ToolbarItem {...toolbar} icon="ellipsis" />
-							</Group>
-						</MainToolbar>
-					</BaseToolbar>
-				</ThemeProvider>
-			</View>
+								<Expander
+									isActive={isActive}
+									isExpanded={isExpanded}
+								>
+									<Group>
+										<ToolbarItem
+											{...toolbar}
+											onFocus={expand}
+											icon="bold"
+										/>
+										<ToolbarItem
+											{...toolbar}
+											icon="italic"
+										/>
+										<ToolbarItem {...toolbar} icon="link" />
+										<ToolbarItem
+											{...toolbar}
+											icon="chevron-down"
+										/>
+									</Group>
+								</Expander>
+								<Group isLast>
+									<ToolbarItem {...toolbar} icon="ellipsis" />
+								</Group>
+							</MainToolbar>
+						</BaseToolbar>
+					</ThemeProvider>
+				</div>
+			</div>
 		</Draggable>
 	);
 }

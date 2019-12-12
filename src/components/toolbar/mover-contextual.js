@@ -25,6 +25,9 @@ export function MoverContextual(props) {
 		onMoveDown,
 		onMoveLeft,
 		onMoveRight,
+		onMouseMove,
+		onMouseDown,
+		onMouseUp,
 		isDragging,
 		isHorizontal,
 		toolbar
@@ -70,6 +73,9 @@ export function MoverContextual(props) {
 									overflow="hidden"
 									as={IconButton}
 									onClick={handleOnMoveUp}
+									onMouseMove={onMouseMove}
+									onMouseDown={onMouseDown}
+									onMouseUp={onMouseUp}
 								/>
 								<ToolbarItem
 									{...toolbar}
@@ -81,6 +87,9 @@ export function MoverContextual(props) {
 									}}
 									size="micro"
 									onClick={handleOnMoveDown}
+									onMouseMove={onMouseMove}
+									onMouseDown={onMouseDown}
+									onMouseUp={onMouseUp}
 								/>
 							</ToolbarItemContainer>
 						</Wrapper>
