@@ -20,7 +20,15 @@ export function MoverWrapper(props) {
 }
 
 export function MoverContextual(props) {
-	const { isDragging, isHorizontal, toolbar } = props;
+	const {
+		onMoveUp,
+		onMoveDown,
+		onMoveLeft,
+		onMoveRight,
+		isDragging,
+		isHorizontal,
+		toolbar
+	} = props;
 
 	const animatedStyles = useSpring({
 		config: {
@@ -28,6 +36,22 @@ export function MoverContextual(props) {
 		},
 		transform: isHorizontal ? "rotate(-90deg)" : "rotate(0deg)"
 	});
+
+	const handleOnMoveUp = () => {
+		if (!isHorizontal) {
+			onMoveUp && onMoveUp();
+		} else {
+			onMoveLeft && onMoveLeft();
+		}
+	};
+
+	const handleOnMoveDown = () => {
+		if (!isHorizontal) {
+			onMoveDown && onMoveDown();
+		} else {
+			onMoveRight && onMoveRight();
+		}
+	};
 
 	return (
 		<MoverWrapper {...props}>
@@ -45,6 +69,7 @@ export function MoverContextual(props) {
 									size="micro"
 									overflow="hidden"
 									as={IconButton}
+									onClick={handleOnMoveUp}
 								/>
 								<ToolbarItem
 									{...toolbar}
@@ -55,6 +80,7 @@ export function MoverContextual(props) {
 										left: 1
 									}}
 									size="micro"
+									onClick={handleOnMoveDown}
 								/>
 							</ToolbarItemContainer>
 						</Wrapper>

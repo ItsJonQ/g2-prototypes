@@ -7,6 +7,7 @@ import { is } from "@itsjonq/is";
 import { ThemeProvider } from "emotion-theming";
 import { useDebouncedCallback } from "use-debounce";
 import { useControls } from "@itsjonq/controls";
+import { View } from "@itsjonq/elm";
 
 import {
 	DragHandlerSliderWrapper,
@@ -22,6 +23,7 @@ import { ToolbarItem } from "./toolbar-item";
 import { ToolbarBlockItem } from "./toolbar-block-item";
 
 export function ToolbarComponent(props) {
+	const [position, setPosition] = useState({ x: 0, y: 0 });
 	const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 	const [isActive, setIsActive] = useState(props.isActive);
 	const [isDragging, setIsDragging] = useState(false);
@@ -42,7 +44,8 @@ export function ToolbarComponent(props) {
 		collapseDebounceTiming,
 		isExpanded: isExpandedProp,
 		isMoverHorizontal,
-		isMoverRightSide
+		isMoverRightSide,
+		moveAmount
 	} = attributes;
 
 	const isExpandedRef = useRef(isExpandedProp);
@@ -96,16 +99,43 @@ export function ToolbarComponent(props) {
 	const showDragHandle =
 		props.alwaysShowMover || alwaysShowMover || isExpanded;
 
+	const isHorizontal = props.isMoverHorizontal || isMoverHorizontal;
+	const isRightSide = props.isMoverRightSide || isMoverRightSide;
+
+	const onMoveUp = () => {
+		setPosition({ x: position.x, y: position.y - moveAmount });
+	};
+
+	const onMoveDown = () => {
+		setPosition({ x: position.x, y: position.y + moveAmount });
+	};
+
+	const onMoveLeft = () => {
+		setPosition({ x: position.x - moveAmount, y: position.y });
+	};
+
+	const onMoveRight = () => {
+		setPosition({ x: position.x + moveAmount, y: position.y });
+	};
+
 	const renderDragHandleProps = {
 		isActive: showDragHandle,
 		isDragging,
 		showDragHandle,
 		onMouseLeave: props.onMouseLeave,
+		onMoveUp,
+		onMoveDown,
+		onMoveLeft,
+		onMoveRight,
 		...toolbar
 	};
 
-	const isHorizontal = props.isMoverHorizontal || isMoverHorizontal;
-	const isRightSide = props.isMoverRightSide || isMoverRightSide;
+	const positionStyle = {
+		position: "relative",
+		transition: "all 200ms ease",
+		transform: `translate(${position.x}px, ${position.y}px)`,
+		zIndex: 1
+	};
 
 	return (
 		<Draggable
@@ -113,65 +143,73 @@ export function ToolbarComponent(props) {
 			onDragStart={handleOnDragStart}
 			onDragStop={handleOnDragStop}
 		>
-			<ThemeProvider theme={theme}>
-				<BaseToolbar
-					{...restProps}
-					{...toolbar}
-					aria-label="G2 Toolbar"
-					onMouseMove={handleOnMouseMove}
-					onMouseLeave={collapse}
-					className="editor-toolbar"
-				>
-					<DragHandlerSliderWrapper
-						ref={dragHandleRef}
-						isActive={showDragHandle}
-						innerWidth={dragHandleWidth}
-						className="drag-handler-slider-wrapper"
-						isRight={isRightSide}
+			<View {...positionStyle}>
+				<ThemeProvider theme={theme}>
+					<BaseToolbar
+						{...restProps}
+						{...toolbar}
+						aria-label="G2 Toolbar"
+						onMouseMove={handleOnMouseMove}
+						onMouseLeave={collapse}
+						className="editor-toolbar"
 					>
-						{renderDragHandle ? (
-							renderDragHandle(renderDragHandleProps)
-						) : (
-							<Mover
-								toolbar={toolbar}
-								{...renderDragHandleProps}
-								type={moverType}
-								isHorizontal={isHorizontal}
-							/>
-						)}
-					</DragHandlerSliderWrapper>
-					<MainToolbar
-						isActive={showDragHandle || isActive}
-						isExpanded={isExpanded}
-						zIndex={1}
-					>
-						<Group>
-							<ToolbarBlockItem {...toolbar} />
-						</Group>
-						<Group>
-							<ReakitToolbarItem
-								{...toolbar}
-								as={AlignDropdown}
-							/>
-						</Group>
-						<Expander isActive={isActive} isExpanded={isExpanded}>
-							<Group>
-								<ToolbarItem
-									{...toolbar}
-									onFocus={expand}
-									icon="bold"
+						<DragHandlerSliderWrapper
+							ref={dragHandleRef}
+							isActive={showDragHandle}
+							innerWidth={dragHandleWidth}
+							className="drag-handler-slider-wrapper"
+							isRight={isRightSide}
+						>
+							{renderDragHandle ? (
+								renderDragHandle(renderDragHandleProps)
+							) : (
+								<Mover
+									toolbar={toolbar}
+									{...renderDragHandleProps}
+									type={moverType}
+									isHorizontal={isHorizontal}
 								/>
-								<ToolbarItem {...toolbar} icon="italic" />
-								<ToolbarItem {...toolbar} icon="link" />
-								<ToolbarItem {...toolbar} icon="chevron-down" />
+							)}
+						</DragHandlerSliderWrapper>
+						<MainToolbar
+							isActive={showDragHandle || isActive}
+							isExpanded={isExpanded}
+							zIndex={1}
+						>
+							<Group>
+								<ToolbarBlockItem {...toolbar} />
 							</Group>
-						</Expander>
-						<Group isLast>
-							<ToolbarItem {...toolbar} icon="ellipsis" />
-						</Group>
-					</MainToolbar>
-				</BaseToolbar>
-			</ThemeProvider>
+							<Group>
+								<ReakitToolbarItem
+									{...toolbar}
+									as={AlignDropdown}
+								/>
+							</Group>
+							<Expander
+								isActive={isActive}
+								isExpanded={isExpanded}
+							>
+								<Group>
+									<ToolbarItem
+										{...toolbar}
+										onFocus={expand}
+										icon="bold"
+									/>
+									<ToolbarItem {...toolbar} icon="italic" />
+									<ToolbarItem {...toolbar} icon="link" />
+									<ToolbarItem
+										{...toolbar}
+										icon="chevron-down"
+									/>
+								</Group>
+							</Expander>
+							<Group isLast>
+								<ToolbarItem {...toolbar} icon="ellipsis" />
+							</Group>
+						</MainToolbar>
+					</BaseToolbar>
+				</ThemeProvider>
+			</View>
 		</Draggable>
 	);
 }
@@ -192,6 +230,7 @@ export function Toolbar(props) {
 	boolean("isExpanded", props.isExpanded || false);
 	boolean("isMoverHorizontal", props.isMoverHorizontal || false);
 	boolean("isMoverRightSide", props.isMoverRightSide || false);
+	number("moveAmount", 100);
 	// Animations
 	number("animationSpeed", 100);
 	text("animationEasing", "linear");
