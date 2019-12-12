@@ -78,25 +78,25 @@ export function ToolbarComponent(props) {
 		};
 
 		const handleMoveEnd = () => {
-			if (isDragging) {
+			if (isMoverDragging) {
 				setIsDragging(false);
 				setIsMoverDragging(false);
 			}
 		};
 
-		if (isDragging) {
+		if (isMoverDragging) {
 			document.addEventListener("mousemove", handleOnMove);
 			document.addEventListener("mouseup", handleMoveEnd);
 		}
 
 		return () => {
-			if (isDragging) {
+			if (isMoverDragging) {
 				document.removeEventListener("mousemove", handleOnMove);
 				document.removeEventListener("mouseup", handleMoveEnd);
 			}
 		};
 	}, [
-		isDragging,
+		isMoverDragging,
 		wrapperPosition,
 		setWrapperPosition,
 		setIsMoverDragging,
